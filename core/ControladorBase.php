@@ -18,7 +18,6 @@ class ControladorBase{
     }
     public function redirect($controlador=CONTROLADOR_DEFECTO, $accion=ACCION_DEFECTO){
             header("Location:index.php?controller=".$controlador."&action=".$accion);
-
     }
 }
 ?>

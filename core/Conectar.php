@@ -14,6 +14,11 @@
 
 		public function conexion(){
 			$con = new mysqli($this->host, $this->user, $this->pass, $this->database);
+                        if ($con->connect_errno) {
+                            printf("Connect failed: %s\n", $con->connect_error);
+                            exit();
+                        }
+
 			$con->query("SET NAMES '".$this->charset."'");
 			return $con;
 		}

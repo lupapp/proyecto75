@@ -6,4 +6,5 @@ return array(
 	"pass"=>"",
 	"database"=>"proyecto75",
 	"charset"=>"utf8"
-	) ?>
+	) 
+        //"pass"=>"E?.u()qCW[X*",?>

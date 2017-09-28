@@ -126,15 +126,28 @@ class Usuario extends EntidadBase{
     }
 
     public function save(){
-        $query="INSER INTO users (id, name, email, password, tipoDocumento, cc, nacimiento, fechaInscripcion, telefono,"
-                ."celular, direccion, ciudad, provincia, pais, rol )"
-                ."VALUES (NULL, '".$this->name."', '".$this->email."', '".$this->password."', '".$this->tipo-documento."'"
-                .", '".$this->cc."', '".$this->nacimiento."', '".$this->fechaInscripcion."', '".$this->telefono."',"
-                .", '".$this->celular."', '".$this->direccion."', '".$this->ciudad."', '".$this->provincia."'"
-                .", '".$this->pais."', '".$this->rol."')";
-        $save=$this->db->query($query);
-        return $save;
+        $query="INSERT INTO users (id, name, email, password, tipoDocumento, cc, nacimiento, fechaInscripcion, telefono, celular,"
+                ."direccion, ciudad, provincia, pais, rol, avatar, remember_token, created_at, updated_at, tipoUsuario) "
+                ."VALUES (NULL, '".$this->name."', '".$this->email."', '".$this->password."', '".$this->tipoDocumento."',"
+                ."'".$this->cc."', '".$this->nacimiento."', '".$this->fechaInscripcion."', '".$this->telefono."', '".$this->celular."',"
+                ."'".$this->direccion."', '".$this->ciudad."', '".$this->provincia."', '".$this->pais."', '".$this->rol."','','','','','')";
+        $save=$this->db()->query($query);
+        return $this->db();
     }
+    public function update(){
+        $query="UPDATE users SET name='".$this->name."', email='".$this->email."', tipoDocumento='".$this->tipoDocumento."',"
+                ."cc='".$this->cc."', nacimiento='".$this->nacimiento."', telefono='".$this->telefono."', celular='".$this->celular."',"
+                ."direccion='".$this->direccion."', ciudad='".$this->ciudad."', provincia='".$this->provincia."', pais='".$this->pais."',"
+                ."rol='".$this->rol."' WHERE id='".$this->id."'";
+        $update=$this->db()->query($query);
+        return $this->db();
+    }
+    public function changePass(){
+        $query="UPDATE users SET password='".$this->password."' WHERE id='".$this->id."'";
+        $update=$this->db()->query($query);
+        return $this->db();
+    }
+   
 }
 
  ?>

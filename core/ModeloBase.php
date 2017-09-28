@@ -1,7 +1,7 @@
 <?php 
 class ModeloBase extends EntidadBase{
 	private $table;
-
+        
 	public function __construct($table){
 		$this->table=(string) $table;
 		parent::__construct($table);

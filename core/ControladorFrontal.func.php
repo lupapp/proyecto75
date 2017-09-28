@@ -2,7 +2,6 @@
 function cargarControlador($controller){
 	$controlador=ucwords($controller).'Controller';
 	$strFileController='controller/'.$controlador.'.php';
-
 	if(!is_file($strFileController)){
             $strFileController='controller/'.ucwords(CONTROLADOR_DEFECTO).'Controller.php';
 	}
