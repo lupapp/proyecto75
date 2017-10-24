@@ -10,12 +10,16 @@ class UsuariosController extends ControladorBase{
         parent::__construct();
     }
     public function index(){
-        $usuario = new Usuario;
-        $allusers=$usuario->getAll();
-        $this->view("usuarios", array(
-            "allusers"=>$allusers,
-            "hola"=>"algo escrito"
-        ));
+        if(Session::get('level')=='admin'){
+            $usuario = new Usuario;
+            $allusers=$usuario->getAll();
+            $this->view("usuarios", array(
+                "allusers"=>$allusers,
+                "hola"=>"algo escrito"
+            ));
+        }else{
+            header("location:?controller=Main");
+        }
     }
     public function create()
     {       
@@ -24,9 +28,9 @@ class UsuariosController extends ControladorBase{
     }
     public function crear(){
         if(isset($_POST['nombre'])){
+            $user=$_POST['usuario'];
             $nombre=$_POST['nombre'];
             $email=$_POST['email'];
-            $password="123";
             $tipoDocumento=$_POST['tipoDocumento'];
             $cc=$_POST['cc'];
             $nacimiento=$_POST['nacimiento'];
@@ -40,9 +44,11 @@ class UsuariosController extends ControladorBase{
             $fechaactual= getdate();
             
             $usuario= new Usuario();
+            $pass=$usuario->gPass();
+            $usuario->setUser($user);
             $usuario->setName($nombre);
             $usuario->setEmail($email);
-            $usuario->setPassword(md5($usuario->gPass()));
+            $usuario->setPassword($pass['passmd5']);
             $usuario->setTipoDocumento($tipoDocumento);
             $usuario->setCc($cc);
             $usuario->setNacimiento($nacimiento);
@@ -54,22 +60,25 @@ class UsuariosController extends ControladorBase{
             $usuario->setProvincia($provincia);
             $usuario->setPais($pais);
             $usuario->setRol($rol);
-            $result[]=$usuario->save();
+            $result=$usuario->save();
+            print_r($result);
+            $password=$pass['pass'];
+            require_once 'config/headers.php';
+            require_once 'config/cuerposMails.php';
+            $datos= array(
+                "destinatario"=>"$email",
+                "asunto"=>"Credenciales registro de usuario Proyectos75",
+                "cuerpo"=>"$cRegistro",
+                "headers"=>"$headers"
+            );
+            $envio=$this->envioMail($datos);
+            echo $result->affected_rows;
            
-            if($result[0]->affected_rows==-1){
-                if($result[0]->error=="Duplicate entry '".$email."' for key 'users_email_unique'"){
-                        header("location:?controller=Respuestas&action=errorCorreo");
-                }else{
-                    if($result[0]->error=="Duplicate entry '".$cc."' for key 'users_cc_unique'"){
-                        header("location:?controller=Respuestas&action=errorCc");
-                    }else{
-                        header("location:?controller=Respuestas&action=errorGeneral");
-                    }
-                }
+            if($result->error=="Duplicate entry '".$user."' for key 'user'"){
+                header("location:?controller=Respuestas&action=errorUser");
             }else{
-                 header("location:?controller=Respuestas&action=registroExito");
+               header("location:?controller=Respuestas&action=registroUserExito");
             }
-            
         }
     }
     public function show(){
@@ -78,6 +87,14 @@ class UsuariosController extends ControladorBase{
             $usuario=new Usuario();
             $user=$usuario->getById($id);
             $this->view("editUsuario",array("user" =>$user));
+        }
+    }
+    public function perfil(){
+        if(isset($_GET['id'])){
+            $id=(int)$_GET['id'];
+            $usuario=new Usuario();
+            $user=$usuario->getById($id);
+            $this->view("editPerfil",array("user" =>$user));
         }
     }
     public function update(){
@@ -111,20 +128,11 @@ class UsuariosController extends ControladorBase{
             $usuario->setPais($pais);
             $usuario->setRol($rol); 
             $result[]=$usuario->update();
+            print_r($result);
             if($result[0]->error==""){
-                 header("location:?controller=Respuestas&action=registroExito");
-                
+                header("location:?controller=Respuestas&action=editExito");
             }else{
-                if($result[0]->error=="Duplicate entry '".$email."' for key 'users_email_unique'"){
-                        header("location:?controller=Respuestas&action=errorCorreo");
-                }else{
-                    if($result[0]->error=="Duplicate entry '".$cc."' for key 'users_cc_unique'"){
-                        header("location:?controller=Respuestas&action=errorCc");
-                    }else{
-                        header("location:?controller=Respuestas&action=errorGeneral");
-                    }
-                }
-                
+                header("location:?controller=Respuestas&action=errorGeneral");
             }
             
         }
@@ -136,44 +144,33 @@ class UsuariosController extends ControladorBase{
             $usuario->setId($_GET['id']);
             $usuario->setPassword(md5($pass));
             print_r($usuario->changePass());
-            $destinatario = $_GET['email']; 
-            $asunto = "Reseteo de contraseña"; 
-            $cuerpo = ' 
-            <html> 
-            <head> 
-               <title>Reseteo de contraseña</title> 
-            </head> 
-            <body> 
-            <h1>Su nueva contraseña es: '.$pass.'</h1> 
-            <p> 
-            <b>Se asigno una nueva contraseña aleatoria si quiere cambiar por otra pulse <a href="?controller=Usuarios&action=cambiarPass">aqui</a> 
-            </p> 
-            </body> 
-            </html> 
-            '; 
-
-            //para el envío en formato HTML 
-            $headers = "MIME-Version: 1.0\r\n"; 
-            $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
-
-            //dirección del remitente 
-            $headers .= "From: <reset@proyecto75.com>\r\n"; 
-
-            //dirección de respuesta, si queremos que sea distinta que la del remitente 
-            $headers .= "Reply-To: hernan@proyectos75.com\r\n"; 
-
-            //ruta del mensaje desde origen a destino 
-            $headers .= "Return-path: proyecto75@proyectos75.com\r\n"; 
-
-            //direcciones que recibián copia 
-            //$headers .= "Cc: maria@desarrolloweb.com\r\n"; 
-
-            //direcciones que recibirán copia oculta 
-            //$headers .= "Bcc: pepe@pepe.com,juan@juan.com\r\n"; 
-
-             mail($destinatario,$asunto,$cuerpo,$headers);
+            require_once 'config/headers.php';
+            require_once 'config/cuerposMails.php';
+            $datos= array(
+                "destinatario"=>"$email",
+                "asunto"=>"Reseteo de contraseña",
+                "cuerpo"=>"$cuerpo",
+                "headers"=>"$headers"
+            );
+            $envio=$this->envioMail($datos);
              header("location:?controller=Respuestas&action=resetExito");
             
+        }
+    }
+    public function  showPass(){
+        $this->view("formChangePass", array());
+    }
+
+    public function cambiopass(){
+        if(isset($_POST['id'])){
+            $id=(int)$_POST['id'];
+            $pass=$_POST['password'];
+            $usuario=new Usuario();
+            $usuario->setId($id);
+            $usuario->setPassword(md5($pass));
+            $usuario->changePass();
+            print_r($usuario);
+            header("location:?controller=Respuestas&action=resetExito");
         }
     }
     public function borrar(){
@@ -181,7 +178,7 @@ class UsuariosController extends ControladorBase{
             $id=(int)$_GET['id'];
             $usuario=new Usuario();
             $usuario->deleteById($id);
-            $this->redirect();
+            header("location:?controller=Respuestas&action=registroDelete");
         }
     }
 }

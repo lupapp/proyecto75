@@ -15,49 +15,48 @@
         <li class="breadcrumb-item">
           <a href="?controller=Main">Back Office</a>
         </li>
-        <li class="breadcrumb-item active">Usuarios </li>
+        <li class="breadcrumb-item active">Planes </li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-users"></i> Lista de usuarios
-          <a class="btn btn-success float-right" href="?controller=Usuarios&action=create">Nuevo Usuario</a></div>
+          <i class="fa fa-users"></i> Lista de Planes
+          <a class="btn btn-success float-right" href="?controller=Planes&action=create">Nuevo Plan</a></div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Teléfono</th>
-                  <th>Ciudad</th>
+                  <th>Avatar</th>
+                  <th>Nombre plan</th>
+                  <th>Valor</th>
+                  <th>% comisión</th>
+                  <th>Valor bono</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Teléfono</th>
-                  <th>Ciudad</th>
+                  <th>Avatar</th>
+                  <th>Nombre plan</th>
+                  <th>Valor</th>
+                  <th>% comisión</th>
+                  <th>Valor bono</th>
                   <th>Opciones</th>
                 </tr>
               </tfoot>
               <tbody>
                 <?php 
-                foreach ($allusers as $user){ ?>
+                foreach ($allplanes as $planes){ ?>
                 <tr>
-                    <td><?php echo $user->user?></td>
-                    <td><?php echo $user->name?></td>
-                    <td><?php echo $user->email?></td>
-                    <td><?php echo $user->telefono?></td>
-                    <td><?php echo $user->ciudad?></td>
+                    <td><img class="img-thumbnail" src="view/img/<?php echo $planes->avatar_plan?>"></td>
+                    <td><?php echo $planes->nombre_plan?></td>
+                    <td><?php echo $planes->valor_plan?></td>
+                    <td><?php echo $planes->porcentaje_comision?></td>
+                    <td><?php echo $planes->valor_bono?></td>
                     <td>
-                        <a class="btn btn-danger btn-options" data-toggle="tooltip" title="Eliminar usuario" href="?controller=Usuarios&action=borrar&id=<?php echo $user->id ?>"><i class="fa fa-trash"></i></a>
-                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar usuario" href="?controller=Usuarios&action=show&id=<?php echo $user->id ?>"><i class="fa fa-pencil"></i></a>
-                        <a class="btn btn-primary btn-options" data-toggle="tooltip" title="Cartillas usuario"><i class="fa fa-bookmark"></i></a>
+                        <a class="btn btn-danger btn-options" data-toggle="tooltip" title="Eliminar plan" href="?controller=Planes&action=borrar&id=<?php echo $planes->id?>"><i class="fa fa-trash"></i></a>
+                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar plan" href="?controller=Planes&action=show&id=<?php echo $planes->id?>"><i class="fa fa-pencil"></i></a>
                     </td>
                 </tr>
                       

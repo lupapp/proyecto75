@@ -17,7 +17,12 @@ class ControladorBase{
         require_once "view/".$vista."View.php";
     }
     public function redirect($controlador=CONTROLADOR_DEFECTO, $accion=ACCION_DEFECTO){
-            header("Location:index.php?controller=".$controlador."&action=".$accion);
+        header("Location:index.php?controller=".$controlador."&action=".$accion);
+    }
+    public function envioMail($datos){
+        mail($datos['destinatario'],$datos['asunto'],$datos['cuerpo'],$datos['headers']);
+        $mail=$datos['destinatario']."-".$datos['asunto']."<br>".$datos['cuerpo']."<br>".$datos['headers'];
+        return $mail;
     }
 }
 ?>

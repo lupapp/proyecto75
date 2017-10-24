@@ -1,59 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <?php 
-  if(Session::get('level')=='admin'){  
-    include "header.php";
-  }else{
-    include "headerSt.php"; 
-  } ?>
-</head>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="?controller=Main">Back Office</a>
-        </li>
-        <li class="breadcrumb-item active">Nuevo Usuario</li>
-      </ol>
-      <!-- Example DataTables Card-->
-      <div class="card mb-3">
-        <div class="card-header">
+  <?php include "headerMs.php";?>
+  <div class="container">
+    <div class="card mx-auto mt-5">
+       <div class="card-header">
             <i class="fa fa-user-plus"></i> Registro de nuevo usuario</div>
         <div class="card-body">
-            <form id="loginForm" action="?controller=Usuarios&action=crear" method="POST"  class="form-horizontal" >
+            <form id="loginForm" action="?controller=Main&action=register" method="POST"  class="form-horizontal" >
                     <div class="form-row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                              <div class="form-group">
                                 <label for="exampleInputUser">*Nombre de usuario</label>
                                 <input class="form-control" id="exampleInputUser" type="text" name="usuario" aria-describedby="usuario" placeholder="Nombre de usuario">
                              </div>
                         </div>
+                        <div class="col-md-4">
+                             <div class="form-group">
+                                <label for="exampleInputUser">*Contraseña</label>
+                                <input class="form-control" id="exampleInputUser" type="password" name="password" aria-describedby="Ingrese una contraseña" placeholder="Ingrese una contraseña">
+                             </div>
+                        </div>
+                        <div class="col-md-4">
+                             <div class="form-group">
+                                <label for="exampleInputUser">*Nuevamente la contraseña</label>
+                                <input class="form-control" id="exampleInputUser" type="password" name="confirmPassword" aria-describedby="vuelva a escribir la contraseña" placeholder="Ingrese una contraseña">
+                             </div>
+                        </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                              <div class="form-group">
                                 <label for="exampleInputName">*Nombre completo</label>
                                 <input class="form-control" id="exampleInputName" type="text" name="nombre" aria-describedby="nombre" placeholder="Nombre completo">
                              </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                              <div class="form-group">
                                 <label for="exampleInputEmail1">*Email address</label>
                                 <input class="form-control" id="exampleInputEmail1" type="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
-                            </div>
+                             </div>
                         </div>
-                         <div class="col-md-4">
-                             <div class="form-group">
-                                <label for="exampleInputName">*Tipo de usuario</label>
-                                <select class="form-control" name="rol" id="exampleFormControlSelect1">
-                                    <option value="standard">Standard</option>
-                                    <option value="admin">Administrador</option>
-                                </select>
-                            </div>
-                        </div>
+                         
                     </div>
                     <div class="form-row">
                         <div class="col-md-4">
@@ -129,24 +117,9 @@
         </div>
       </div>
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <?php include 'logoutModal.php'; ?>
-    <!-- Bootstrap core JavaScript-->
-     <?php include "footer.php"; ?>
   </div>
+  <!-- Bootstrap core JavaScript-->
+  <?php include "footerInit.php";?>
 </body>
 
 </html>

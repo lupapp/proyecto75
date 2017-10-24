@@ -12,18 +12,18 @@
           <h4 class="mensajeError"><?php echo $mensaje ?></h4>
           
         </div>
-          <?php if($linkBoton){ ?>
+          <?php if(isset($linkBoton)){ ?>
                 <a class="btn btn-success btn-block" href="<?php echo $linkBoton ?>">Ok</a>
           <?php } ?>
         <div class="text-center">
-         <?php if($link){
+         <?php if(isset($link)){
               echo $link;
           } ?>
         </div>
       </div>
     </div>
   </div>
-  <?php include "footer.php"; ?>
+  <?php include "footerInit.php"; ?>
 </body>
 
 </html>

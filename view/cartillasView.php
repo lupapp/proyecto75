@@ -15,48 +15,48 @@
         <li class="breadcrumb-item">
           <a href="?controller=Main">Back Office</a>
         </li>
-        <li class="breadcrumb-item active">Usuarios </li>
+        <li class="breadcrumb-item active">Cartillas </li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-users"></i> Lista de usuarios
-          <a class="btn btn-success float-right" href="?controller=Usuarios&action=create">Nuevo Usuario</a></div>
+          <i class="fa fa-users"></i> Lista de cartillas
+          <a class="btn btn-success float-right" href="?controller=Cartillas&action=create">Nueva Cartilla</a></div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Teléfono</th>
-                  <th>Ciudad</th>
+                  <th>Usuario padre</th>
+                  <th>plan</th>
+                  <th>Fecha vencimiento</th>
+                  <th>Fecha creación</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Teléfono</th>
-                  <th>Ciudad</th>
+                  <th>Usuario padre</th>
+                  <th>plan</th>
+                  <th>Fecha vencimiento</th>
+                  <th>Fecha creación</th>
                   <th>Opciones</th>
                 </tr>
               </tfoot>
               <tbody>
                 <?php 
-                foreach ($allusers as $user){ ?>
+                foreach ($cartillas as $car){ ?>
                 <tr>
-                    <td><?php echo $user->user?></td>
-                    <td><?php echo $user->name?></td>
-                    <td><?php echo $user->email?></td>
-                    <td><?php echo $user->telefono?></td>
-                    <td><?php echo $user->ciudad?></td>
+                    <td><?php echo $car['cartilla']->user?></td>
+                    <td><?php echo $car['padre']->user?></td>
+                    <td><?php echo $car['cartilla']->nombre_plan?></td>
+                    <td><?php echo $car['cartilla']->fecha_vencimiento?></td>
+                    <td><?php echo $car['cartilla']->fecha_creacion?></td>
                     <td>
-                        <a class="btn btn-danger btn-options" data-toggle="tooltip" title="Eliminar usuario" href="?controller=Usuarios&action=borrar&id=<?php echo $user->id ?>"><i class="fa fa-trash"></i></a>
-                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar usuario" href="?controller=Usuarios&action=show&id=<?php echo $user->id ?>"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-danger btn-options" data-toggle="tooltip" title="Eliminar usuario" href="?controller=Cartillas&action=borrar&id=<?php echo $user->id ?>"><i class="fa fa-trash"></i></a>
+                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar usuario" href="?controller=Cartillas&action=show&id=<?php echo $user->id ?>"><i class="fa fa-pencil"></i></a>
                         <a class="btn btn-primary btn-options" data-toggle="tooltip" title="Cartillas usuario"><i class="fa fa-bookmark"></i></a>
                     </td>
                 </tr>

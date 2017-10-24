@@ -22,6 +22,9 @@
 			$con->query("SET NAMES '".$this->charset."'");
 			return $con;
 		}
+                public function close($conexion){
+                    mysqli_close($conexion);
+                }
 	}
 
 

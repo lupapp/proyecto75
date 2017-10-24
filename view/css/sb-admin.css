@@ -371,3 +371,20 @@ footer.sticky-footer {
 .mensajeError{
     color:#666;
 }
+.autenticacion{
+    padding:5px 10px 5px;
+}
+.rol{
+    float:left;
+    color:#fff;
+}
+.nombreUser{
+    float:left;
+    color:#fff;
+}
+.fondo-white{
+    background:#eee !important;
+}
+white-space-normal{
+    white-space:normal;
+}

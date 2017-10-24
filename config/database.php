@@ -1,4 +1,12 @@
 <?php 
+/*return array(
+	"driver"=>"mysql",
+	"host"=>"localhost",
+	"user"=>"welthtre_app",
+	"pass"=>"E?.u()qCW[X*",
+	"database"=>"welthtre_proyecto75",
+	"charset"=>"utf8"
+	);*/ 
 return array(
 	"driver"=>"mysql",
 	"host"=>"localhost",
@@ -6,5 +14,5 @@ return array(
 	"pass"=>"",
 	"database"=>"proyecto75",
 	"charset"=>"utf8"
-	) 
-        //"pass"=>"E?.u()qCW[X*",?>
+	); 
+?>

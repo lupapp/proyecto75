@@ -1,134 +1,139 @@
 <?php 
 class Usuario extends EntidadBase{
-    private $id, $name, $email, $password, $tipoDocumento, $cc, $nacimiento, $fechaInscripcion, $telefono, $celular, $direccion, $ciudad, $provincia, $pais, $rol;
+    private $id, $user, $name, $email, $password, $tipoDocumento, $cc, $nacimiento, $fechaInscripcion, $telefono, $celular, $direccion, $ciudad, $provincia, $pais, $rol;
     public function __construct(){
         $table="users";
         parent::__construct($table);
     }
-    function getId() {
+    public function getId() {
         return $this->id;
     }
-
-    function getName() {
+    public function getUser() {
+        return $this->user;
+    }
+    public function getName() {
         return $this->name;
     }
 
-    function getEmail() {
+    public function getEmail() {
         return $this->email;
     }
 
-    function getPassword() {
+    public function getPassword() {
         return $this->password;
     }
 
-    function getTipoDocumento() {
+    public function getTipoDocumento() {
         return $this->tipoDocumento;
     }
 
-    function getCc() {
+    public function getCc() {
         return $this->cc;
     }
 
-    function getNacimiento() {
+    public function getNacimiento() {
         return $this->nacimiento;
     }
 
-    function getFechaInscripcion() {
+    public function getFechaInscripcion() {
         return $this->fechaInscripcion;
     }
 
-    function getTelefono() {
+    public function getTelefono() {
         return $this->telefono;
     }
 
-    function getCelular() {
+    public function getCelular() {
         return $this->celular;
     }
 
-    function getDireccion() {
+    public function getDireccion() {
         return $this->direccion;
     }
 
-    function getCiudad() {
+    public function getCiudad() {
         return $this->ciudad;
     }
 
-    function getProvincia() {
+    public function getProvincia() {
         return $this->provincia;
     }
 
-    function getPais() {
+    public function getPais() {
         return $this->pais;
     }
 
-    function getRol() {
+    public function getRol() {
         return $this->rol;
     }
 
-    function setId($id) {
+    public function setId($id) {
         $this->id = $id;
     }
-
-    function setName($name) {
+    public function setUser($user) {
+        $this->user = $user;
+    }
+    public function setName($name) {
         $this->name = $name;
     }
 
-    function setEmail($email) {
+    public function setEmail($email) {
         $this->email = $email;
     }
 
-    function setPassword($password) {
+    public function setPassword($password) {
         $this->password = $password;
     }
 
-    function setTipoDocumento($tipoDocumento) {
+    public function setTipoDocumento($tipoDocumento) {
         $this->tipoDocumento = $tipoDocumento;
     }
 
-    function setCc($cc) {
+    public function setCc($cc) {
         $this->cc = $cc;
     }
 
-    function setNacimiento($nacimiento) {
+    public function setNacimiento($nacimiento) {
         $this->nacimiento = $nacimiento;
     }
 
-    function setFechaInscripcion($fechaInscripcion) {
+    public function setFechaInscripcion($fechaInscripcion) {
         $this->fechaInscripcion = $fechaInscripcion;
     }
 
-    function setTelefono($telefono) {
+    public function setTelefono($telefono) {
         $this->telefono = $telefono;
     }
 
-    function setCelular($celular) {
+    public function setCelular($celular) {
         $this->celular = $celular;
     }
 
-    function setDireccion($direccion) {
+    public function setDireccion($direccion) {
         $this->direccion = $direccion;
     }
 
-    function setCiudad($ciudad) {
+    public function setCiudad($ciudad) {
         $this->ciudad = $ciudad;
     }
 
-    function setProvincia($provincia) {
+    public function setProvincia($provincia) {
         $this->provincia = $provincia;
     }
 
-    function setPais($pais) {
+    public function setPais($pais) {
         $this->pais = $pais;
     }
 
-    function setRol($rol) {
+    public function setRol($rol) {
         $this->rol = $rol;
     }
-
+    
+   
     public function save(){
-        $query="INSERT INTO users (id, name, email, password, tipoDocumento, cc, nacimiento, fechaInscripcion, telefono, celular,"
+        $query="INSERT INTO users (id, user, name, email, password, tipoDocumento, cc, nacimiento, fechaInscripcion, telefono, celular,"
                 ."direccion, ciudad, provincia, pais, rol, avatar, remember_token, created_at, updated_at, tipoUsuario) "
-                ."VALUES (NULL, '".$this->name."', '".$this->email."', '".$this->password."', '".$this->tipoDocumento."',"
+                ."VALUES (NULL, '".$this->user."', '".$this->name."', '".$this->email."', '".$this->password."', '".$this->tipoDocumento."',"
                 ."'".$this->cc."', '".$this->nacimiento."', '".$this->fechaInscripcion."', '".$this->telefono."', '".$this->celular."',"
                 ."'".$this->direccion."', '".$this->ciudad."', '".$this->provincia."', '".$this->pais."', '".$this->rol."','','','','','')";
         $save=$this->db()->query($query);

@@ -8,23 +8,22 @@
   }else{
     include "headerSt.php"; 
   } ?>
+
   <div class="content-wrapper">
     <div class="container-fluid">
-      <?php if(Session::get('level')=='admin'){
-            include "contadmin/escritorio.html";
-         }else{
-             include "contuser/red.html";
-         } ?>
-    </div>
+      <!-- Breadcrumbs-->
+     <?php if(Session::get('level')=='admin'){
+        include "contadmin/editaruser.html";
+     }else{
+         include "contuser/editaruser.html";
+     } ?> 
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    
-    <!-- Scroll to Top Button-->
-    
+    </div>
     <!-- Logout Modal-->
     <?php include 'logoutModal.php'; ?>
     <!-- Bootstrap core JavaScript-->
-    <?php include "footer.php"; ?>
+     <?php include "footer.php"; ?>
   </div>
 </body>
 

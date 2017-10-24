@@ -12,22 +12,24 @@ class LoginController extends ControladorBase{
     }
     
     public function login(){
-        $cc=$_POST['cc'];
+        $value=$_POST['value'];
         $pass=$_POST['pass'];
         $usuario=new Usuario();
-        $user=$usuario->getLogin($cc,$pass);
+        $user=$usuario->getLogin($value,$pass);
         if(!$user){
             $this->view("mensajeError", array("mensaje"=>"Usuario o contraseña no valido","link"=>"<script>setTimeout('javacript:history.back(1)', 2500)</script>"));
             exit;
         }else{
             Session::set('autenticado', true);
             Session::set('level', $user->rol);
+            Session::set('id', $user->id);
+            Session::set('user', $user->user);
             Session::set('nombre', $user->name);
             Session::set('avatar', $user->avatar);
             Session::set('cc', $user->cc);
             Session::set('email', $user->email);
             Session::set('tiempo', time());
-            $this->view("mensajeExito", array("mensaje"=>"Sesión exitosamente", "link"=>"<script>setTimeout('javacript:history.back(1)', 2500)</script>"));
+            $this->view("mensajeExito", array("mensaje"=>"Inicio sesión exitosamente", "link"=>"<script>setTimeout('javacript:history.back(1)', 2500)</script>"));
         }
     }
     
