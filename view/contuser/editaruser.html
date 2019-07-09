@@ -14,15 +14,15 @@
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label for="exampleInputName">*Nombre completo</label>
-                                <input value="<?php echo $user->id ?>" type="hidden" name="id" >
+                                <input value="<?php echo $user[0]->id ?>" type="hidden" name="id" >
                                 <input value="<?php echo Session::get('level') ?>" type="hidden" name="rol" >
-                                <input value="<?php echo $user->name ?>" class="form-control" id="exampleInputName" type="text" name="nombre" aria-describedby="nombre" placeholder="Nombre completo">
+                                <input value="<?php echo $user[0]->name ?>" class="form-control" id="exampleInputName" type="text" name="nombre" aria-describedby="nombre" placeholder="Nombre completo">
                              </div>
                         </div>
                         <div class="col-md-6">
                              <div class="form-group">
                                 <label for="exampleInputEmail1">*Email address</label>
-                                <input value="<?php echo $user->email ?>" class="form-control" id="exampleInputEmail1" type="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
+                                <input value="<?php echo $user[0]->email ?>" class="form-control" id="exampleInputEmail1" type="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleInputName">*Tipo de documento</label>
-                                <select value="<?php echo $user->tipoDocumento ?>" class="form-control" name="tipoDocumento" id="exampleFormControlSelect1">
+                                <select  class="form-control" name="tipoDocumento" id="exampleFormControlSelect1">
+                                    <option><?php echo $user[0]->tipoDocumento ?></option>
                                     <option>CI</option>
                                     <option>CE</option>
                                     <option>Pasaporte</option>
@@ -40,14 +41,14 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">*Documento de indentidad</label>
-                                <input value="<?php echo $user->cc ?>" class="form-control" id="exampleInputEmail1" type="text" name="cc" aria-describedby="emailHelp" placeholder="Documento de identidad">
+                                <input value="<?php echo $user[0]->cc ?>" class="form-control" id="exampleInputEmail1" type="text" name="cc" aria-describedby="emailHelp" placeholder="Documento de identidad">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleInputName">Fecha de nacimiento</label>
                                 <div class="input-group date fj-date">
-                                    <input value="<?php echo $user->nacimiento ?>" type="text" name="nacimiento" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input value="<?php echo $user[0]->nacimiento ?>" type="text" name="nacimiento" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -57,19 +58,19 @@
                           <div class="col-md-4">
                               <div class="form-group">
                                   <label for="exampleInputName">Teléfono</label>
-                                  <input value="<?php echo $user->telefono ?>" class="form-control" id="exampleInputName" type="text" name="telefono" aria-describedby="nombre" placeholder="Número de teléfono">
+                                  <input value="<?php echo $user[0]->telefono ?>" class="form-control" id="exampleInputName" type="text" name="telefono" aria-describedby="nombre" placeholder="Número de teléfono">
                               </div>
                           </div>
                           <div class="col-md-4">
                               <div class="form-group">
                                   <label for="exampleInputEmail1">Celular</label>
-                                  <input value="<?php echo $user->celular ?>" class="form-control" id="exampleInputEmail1" type="text" name="celular" aria-describedby="emailHelp" placeholder="Número de celular">
+                                  <input value="<?php echo $user[0]->celular ?>" class="form-control" id="exampleInputEmail1" type="text" name="celular" aria-describedby="emailHelp" placeholder="Número de celular">
                               </div>
                           </div>
                           <div class="col-md-4">
                               <div class="form-group">
                                   <label for="exampleInputEmail1">Dirección</label>
-                                  <input value="<?php echo $user->direccion ?>" class="form-control" id="exampleInputEmail1" type="text" name="direccion" aria-describedby="emailHelp" placeholder="Dirección">
+                                  <input value="<?php echo $user[0]->direccion ?>" class="form-control" id="exampleInputEmail1" type="text" name="direccion" aria-describedby="emailHelp" placeholder="Dirección">
                               </div>
                           </div>
                         </div>
@@ -79,19 +80,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputName">Ciudad</label>
-                            <input value="<?php echo $user->ciudad ?>" class="form-control" id="exampleInputName" type="text" name="ciudad" aria-describedby="nombre" placeholder="Ciudad">
+                            <input value="<?php echo $user[0]->ciudad ?>" class="form-control" id="exampleInputName" type="text" name="ciudad" aria-describedby="nombre" placeholder="Ciudad">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Provincia</label>
-                            <input value="<?php echo $user->provincia ?>" class="form-control" id="exampleInputEmail1" type="text" name="provincia" aria-describedby="emailHelp" placeholder="Provincia">
+                            <input value="<?php echo $user[0]->provincia ?>" class="form-control" id="exampleInputEmail1" type="text" name="provincia" aria-describedby="emailHelp" placeholder="Provincia">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEmail1">País</label>
-                            <input value="<?php echo $user->pais ?>" class="form-control" id="exampleInputEmail1" type="text" name="pais" aria-describedby="emailHelp" placeholder="País">
+                            <input value="<?php echo $user[0]->pais ?>" class="form-control" id="exampleInputEmail1" type="text" name="pais" aria-describedby="emailHelp" placeholder="País">
                         </div>
                         </div>
                     </div>

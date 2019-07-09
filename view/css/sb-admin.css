@@ -14,10 +14,39 @@ body.sticky-footer {
   margin-bottom: 56px; }
   body.sticky-footer .content-wrapper {
     min-height: calc(100vh - 56px - 56px); }
-
+.bg-blue{
+    background:#055ead;
+}
 body.fixed-nav {
   padding-top: 56px; }
-
+.btn{
+    cursor: pointer;    
+}
+h1,h2,h3{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    /*font-family: 'Patrick Hand', cursive;*/
+}
+h2{
+    font-size: 1.75em;
+}
+h3{
+    font-size: 1.5em;
+}
+.w-30{
+    width:30%;
+}
+.w-10{
+    width:10%;
+}
+.w-5{
+    width:5%;
+}
+.nuevousuario{
+  display:none;
+}
+.cerraruser{
+  display:none
+}
 .content-wrapper {
   min-height: calc(100vh - 56px);
   padding-top: 1rem; }
@@ -39,7 +68,11 @@ body.fixed-nav {
     background: #343a40; }
   .scroll-to-top i {
     font-weight: 800; }
-
+ 
+  a:hover{
+      text-decoration: none;
+      color:#44b8ff;
+  }
 .smaller {
   font-size: 0.7rem; }
 
@@ -304,12 +337,14 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 .card-body-icon {
   position: absolute;
   z-index: 0;
-  top: -25px;
-  right: -25px;
+  top: 0px;
+  right: 5px;
   font-size: 5rem;
   -webkit-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
-  transform: rotate(15deg); }
+  transform: rotate(15deg); 
+  width: 150px;
+}
 
 @media (min-width: 576px) {
   .card-columns {
@@ -387,4 +422,147 @@ footer.sticky-footer {
 }
 white-space-normal{
     white-space:normal;
+}
+.btn-ttc,
+.btn-ttc:hover,
+.btn-ttc:active {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #7033e8 ;
+}
+.btn-ttc {
+  background-repeat: repeat-x;
+  background-image: linear-gradient(top, #430fa9 0%, #7033e8 100%);
+ 
+}
+
+.btn-ttc:hover {
+  background-position: 0 -15px;
+}
+.btn-min,
+.btn-min:hover
+.btn-min:active{
+    position: absolute;
+    padding: 3px;
+    font-size: 10px;
+    cursor: pointer;
+    top: 3px;
+    right: 15px;
+}
+.plannewuser{
+    height:38px;
+}
+.hasHoverShadow{
+   transition: box-shadow .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.4,0,.2,1);
+   cursor:pointer;
+}
+.hasHoverShadow:hover{
+    box-shadow: 0 0 4px 0 rgba(46,62,72,.12), 0 4px 12px 0 rgba(46,62,72,.12);
+    transform: translateY(-1px);  
+}
+.fa-arrows-alt{
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    top: 4px;
+}
+.fa-compress{
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    top: 4px;
+    display:none;
+}
+.solpen{
+    position: absolute !important;
+    top: -6px !important;
+    right: 6px;
+}
+.papen{
+    position: absolute !important;
+    top: -6px !important;
+    right: 6px;
+}
+.width-footerInit{
+    width: calc(100%) !important;
+}
+.checkbox label:after, 
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+.iduserRef span, .iduserPadre span{
+    padding-top: 0 !important;
+    margin-top: -15px;
+}
+.metodo-pago{
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.metodo-pago i{
+   position: relative;
+    float: right;
+    top: 0px;
+}
+hr{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width:100%;
+}
+.producto-co img{
+    width:100%;
 }

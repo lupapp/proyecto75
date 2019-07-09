@@ -10,11 +10,16 @@
   } ?>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <?php if(Session::get('level')=='admin'){
-            include "contadmin/escritorio.html";
+      <?php 
+      if(Session::get('autenticado')==true){
+        if(Session::get('level')=='admin'){
+             header("location:?controller=Usuarios");
          }else{
-             include "contuser/red.html";
-         } ?>
+             include "contuser/red.php";
+         } 
+       }else{
+           $this->view("login", array());
+       } ?>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

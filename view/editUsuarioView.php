@@ -14,9 +14,10 @@
       <!-- Breadcrumbs-->
      <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Back Office</a>
+          <a href="?controller=Main" class="text-success">Back Office</a>
         </li>
         <li class="breadcrumb-item active">Edición usuario</li>
+        <a href="javascript:history.back(1)" class="btn btn-primary float-right cursor-pointer mr-2" >Regresar</a>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
@@ -26,10 +27,16 @@
             <form id="loginForm" action="?controller=Usuarios&action=update" method="POST"  class="form-horizontal" >
                     <div class="form-row">
                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputName">*Usuario</label>
+                                <input  class="form-control usuario" id="exampleInputName" type="text" name="user" aria-describedby="user" placeholder="Nombre de usuario" value="<?php echo $user->user ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                              <div class="form-group">
                                 <label for="exampleInputName">*Nombre completo</label>
-                                <input value="<?php echo $user->id ?>" type="hidden" name="id" >
-                                <input value="<?php echo $user->name ?>" class="form-control" id="exampleInputName" type="text" name="nombre" aria-describedby="nombre" placeholder="Nombre completo">
+                                <input type="hidden" value="<?php echo $user->id ?>"  name="id" >
+                                <input  class="form-control" id="exampleInputName" type="text" name="nombre" aria-describedby="nombre" placeholder="Nombre completo" value="<?php echo $user->name ?>">
                              </div>
                         </div>
                         <div class="col-md-4">

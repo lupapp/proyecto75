@@ -1,18 +1,58 @@
 <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a href="?controller=Main">Bakc Office</a>
-    </li>
-    <li class="breadcrumb-item active">Red | Plan Start
-        <img src="">
-
-    </li>
-    <div class="form-horizontal col-xl-6 float-right">
-        <div class="form-group row mb-0">
-            <label for="exampleInputName" class="control-label col-xl-3 col-md-4 col-sm-auto mt-2">Cambiar plan</label>
-            <select class="form-control col-xl-4 col-md-8 col-sm-auto" name="tipoDocumento" id="exampleFormControlSelect1">
-                <option>Plan Ejecutivo</option>
-            </select>
+        <li class="breadcrumb-item">
+          <a href="?controller=Main">Back Office</a>
+        </li>
+        <li class="breadcrumb-item active">Comisiones por plan </li>
+        <a href="javascript:history.back(1)" class="btn btn-primary float-right cursor-pointer mr-2" >Regresar</a>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+            <div class="p-3 mb-2 bg-info text-white text-uppercase font-weight-bold">
+                <i class="fa fa-user"></i> <?php echo $user[0]->user." / ".$user[0]->name; ?>
+            </div>
+        <div class="card-body">
+            <div class="row">
+                <?php 
+                if(!isset($cartillas[1])){
+                    echo "<div  class='text-center text-primary w-100'>El usuario no posee planes actualmente</div>";
+                }else{
+                    for($i=1; $i<count($cartillas); $i++){ ?>
+                <div class=" col-sm-6 mb-5">
+                    <div class="card bg-faded o-hidden h-100">
+                      <div class="card-body">
+                        <div class="card-body-icon">
+                            <img src="view/img/<?php echo $cartillas[$i]['plan']->avatar_plan ?>" >  
+                        </div>
+                          <ul class="list-unstyled">
+                              <li class="text-uppercase font-weight-bold"></h2><?php echo $cartillas[$i]['plan']->nombre_plan ?>  </h2>  ID: <?php echo $cartillas[$i]['cartilla']->id ?> </li>
+                              <li >Valor membresía: $ <?php echo $cartillas[$i]['plan']->valor_plan ?>  </li>
+                              <li>Fecha de creación: <?php echo $cartillas[$i]['cartilla']->fecha_creacion ?>  </li>
+                              <li class="font-weight-bold">Comisiones Disponibles</li>
+                              <li>
+                                    <div class="p-2 mb-2 bg-success text-white">
+                                        <h4>
+                                            $ <?php 
+                                            if($cartillas[$i]['total']->suma==''){
+                                                echo 0; 
+                                            }else{
+                                                echo $cartillas[$i]['total']->suma;
+                                            }?>
+                                        </h4>
+                                    </div>
+                              </li>
+                          </ul> 
+                      </div>
+                      <a class="card-footer clearfix small z-1" href="?controller=Cartillas&action=showHistorialComision&id=<?php echo $cartillas[$i]['cartilla']->id?>&id_user=<?php echo $cartillas[$i]['cartilla']->id_user?>">
+                        <span class="float-left">Más detalles</span>
+                        <span class="float-right">
+                          <i class="fa fa-angle-right"></i>
+                        </span>
+                      </a>
+                    </div>
+                </div>
+            <?php } 
+                } ?>
+            </div>
         </div>
-    </div>
-</ol>
 

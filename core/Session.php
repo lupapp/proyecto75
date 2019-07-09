@@ -26,6 +26,11 @@ class Session{
             $_SESSION[$clave]=$valor;
          }
      }
+     public static function getAll(){
+         if(isset($_SESSION)){
+             return $_SESSION;
+         }
+     }
      public static function get($clave){
          if(isset($_SESSION[$clave])){
              return $_SESSION[$clave];

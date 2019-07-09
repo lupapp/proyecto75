@@ -1,0 +1,14 @@
+[28-Feb-2018 09:33:36 America/Chicago] PHP Notice:  Undefined index: id_pago in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 33
+[28-Feb-2018 09:33:36 America/Chicago] PHP Notice:  Undefined index: valor in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 34
+[28-Feb-2018 09:42:42 America/Chicago] PHP Notice:  Undefined index: id_pago in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 33
+[28-Feb-2018 09:42:42 America/Chicago] PHP Notice:  Undefined index: valor in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 34
+[06-Mar-2018 14:36:46 America/Chicago] PHP Notice:  Undefined index: id_pago in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 33
+[06-Mar-2018 14:36:46 America/Chicago] PHP Notice:  Undefined index: valor in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 34
+[06-Mar-2018 14:41:12 America/Chicago] PHP Notice:  Undefined index: id_pago in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 33
+[06-Mar-2018 14:41:12 America/Chicago] PHP Notice:  Undefined index: valor in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 34
+[07-Mar-2018 09:23:03 America/Chicago] PHP Notice:  Undefined index: id_pago in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 33
+[07-Mar-2018 09:23:03 America/Chicago] PHP Notice:  Undefined index: valor in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 34
+[07-Mar-2018 13:25:54 America/Chicago] PHP Notice:  Undefined index: id_pago in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 33
+[07-Mar-2018 13:25:54 America/Chicago] PHP Notice:  Undefined index: valor in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 34
+[07-Mar-2018 14:46:33 America/Chicago] PHP Notice:  Undefined index: id_pago in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 33
+[07-Mar-2018 14:46:33 America/Chicago] PHP Notice:  Undefined index: valor in /home/mastercash1/public_html/backoffice/bitcoins/pago.php on line 34

@@ -13,9 +13,9 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
      <?php if(Session::get('level')=='admin'){
-        include "contadmin/editaruser.html";
+        include "contadmin/editaruser.php";
      }else{
-         include "contuser/editaruser.html";
+         include "contuser/editaruser.php";
      } ?> 
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

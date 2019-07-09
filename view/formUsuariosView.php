@@ -14,9 +14,10 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="?controller=Main">Back Office</a>
+          <a href="?controller=Main" class="text-success">Back Office</a>
         </li>
         <li class="breadcrumb-item active">Nuevo Usuario</li>
+        <a href="javascript:history.back(1)" class="btn btn-primary float-right cursor-pointer mr-2" >Regresar</a>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">

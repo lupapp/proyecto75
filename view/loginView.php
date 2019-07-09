@@ -3,6 +3,18 @@
 <head>
   <?php include "headerMs.php";?>
   <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="col-md-5"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+          </div>
+      </div>
     <div class="card card-login mx-auto mt-5">
        <div class="card-header">Login</div>
       <div class="card-body">
@@ -20,7 +32,8 @@
            <a href="javascript:history.back(1)" class="btn btn-success btn-block cursor-pointer mr-2" >Regresar</a>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="?controller=Main&action=registerShow">Registrarse</a>
+          <a class="d-block small mt-3" href="?controller=Main&action=registerUser">Registrarse</a>
+          <a class="d-block small mt-3" href="?controller=Main&action=registerShow">Obtener membresía</a>
           <a class="d-block small mt-3" href="?controller=Main&action=recordar">Olvide la contraseña</a>
          
           

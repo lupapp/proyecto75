@@ -12,7 +12,7 @@ return array(
 	"host"=>"localhost",
 	"user"=>"root",
 	"pass"=>"",
-	"database"=>"proyecto75",
+	"database"=>"mastercash",
 	"charset"=>"utf8"
 	); 
 ?>

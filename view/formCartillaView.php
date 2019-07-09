@@ -14,92 +14,125 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="?controller=Main">Back Office</a>
+          <a href="?controller=Main" class="text-success">Back Office</a>
         </li>
-        <li class="breadcrumb-item active">Nuevo Cartilla</li>
+        <li class="breadcrumb-item active">Nueva membresía del usuario <?php echo "<span class='text-success font-weight-bold   '>".$user[0]-> user."</span>" ?> </li>
+        <a href="javascript:history.back(1)" class="btn btn-primary float-right cursor-pointer mr-2" >Regresar</a>
       </ol>
       <!-- Example DataTables Card-->
-      <div class="card mb-3">
+    <div class="card mb-3">
         <div class="card-header">
-            <i class="fa fa-user-plus"></i> Crear cartilla</div>
+          
+           <form action="?controller=Cartillas&action=crear" method="POST">
+               <input type="hidden" name="id_user" value="<?php echo $user[0]->id ?>">
+               <input type="hidden" name="id_plan" value="<?php echo $plan->id ?>">
+               <input type="hidden" name="id_cartilla_padre" value="0">
+               <div class="row">
+                   <div class="col-md-4">
+                       <div class="form-row">
+                            <div class="col-md-8">
+                                 <div class="form-group">
+                                    <label for="exampleInputUser" class="text-primary font-weight-bold">Usuario Referido</label>
+                                    <input class="form-control buscarRef2" id="exampleInputUser" type="text"  placeholder="Escriba el usuario que refiere esta membresía si ese es el caso">
+                                    <div class="col-md-4 iduserRef"></div>
+                                 </div>
+                            </div>
+
+                            
+                       </div>
+                   </div>
+                   <div class="col-md-2">
+                       <div class="form-group">
+                           <label for="exampleInputUser" class="text-primary font-weight-bold">Membresía</label>
+                            <select class="custom-select pt-0 pb-0 pr-4 pl-4 w-75" name="id_plan">
+                                 <?php 
+                                 for ($j=0; $j<count($allplanes);$j++){ ?>
+                                     <option value="<?php echo $allplanes[$j]->id ?>"><?php echo $allplanes[$j]->nombre_plan ?></option>
+                                 <?php } ?>
+                             </select>
+                       </div>
+                   </div>
+                   <div class="col-md-2">
+                       <div class="form-group">
+                           <label for="exampleInputName">Fecha de inscripción</label>
+                           <div class="input-group date fj-date">
+                               <input type="text" name="insc" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-3">
+                        <button class="btn btn-success float-right" >Crear la membresía sin padre <i class="fa fa-arrow-right"></i></button>
+                   </div>
+               </div>
+           </form>
+           <i class="fa fa-users"></i> Busque una membresia como padre
+        </div>
         <div class="card-body">
-            <form id="loginForm" action="?controller=Planes&action=crear" method="POST"  class="form-horizontal" enctype="multipart/form-data" >
-                    <div class="form-row">
-                        <div class="col-md-4">
-                             <div class="form-group">
-                                <label for="exampleInputPlan">*Seleccionar plan</label>
-                                <input class="form-control" id="exampleInputPlan" type="text" name="plan" aria-describedby="plan" placeholder="Nombre de plan">
-                             </div>
-                        </div>
-                        <div class="col-md-4">
-                             <div class="form-group">
-                                <label for="exampleInputValor">*Usuario</label>
-                                 <select class="form-control selectpicker"  data-live-search="true" data-show-content="false" data-hide-disabled="false">
-                                        <?php 
-                                        foreach ($users as $u){ ?>
-                                            <option value="<?php echo $u['id'] ?>"><?php echo $u['user']?></option>
-                                        <?php } ?>
-                                  </select>
-                             </div>
-                        </div>
-                        <div class="col-md-4">
-                             <div class="form-group">
-                                <label for="exampleInputComision">*Porcentaje de comisión</label>
-                                <input class="form-control" id="exampleInputComision" type="text" name="porcentaje" aria-describedby="porcentaje" placeholder="Porcentaje de comisión">
-                            </div>
-                        </div>
-                         
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-3">
-                             <div class="form-group">
-                                <label for="exampleInputVencimiento">*Duración en días del plan</label>
-                                <input class="form-control" id="exampleInputVencimiento" type="text" name="dias" aria-describedby="dias" placeholder="Escriva la cantidad de días que dura el plan">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="exampleInputEstado">*Estado</label>
-                                <select class="form-control selectpicker2" data-live-search="true" name="estado" id="exampleInputEstado">
-                                    <?php foreach ($planes as $p){?>
-                                            <option value="<?php echo $p['id'] ?>"><?php echo $p['nombre_plan'] ?></option>
-                                        <?php } ?>
-                                </select>
-                            </div>
-                        </div>
+          <?php 
+          if(!isset($cartillas[1])){
+                echo "<div  class='text-center text-primary w-100'>No existen otros planes</div>";
+          }else{ ?>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Membresía padre</th>
+                    <!--<th>Usuario que refiere</th>-->
+                    <th>Seleccione la fecha de inscripción</th>
+                  <th colspan="2">Selecione Membresía</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                    <th>Membresía padre</th>
+                    <!--<th>Usuario que refiere</th>-->
+                    <th>Seleccione la fecha de inscripción</th>
+                    <th colspan="2">Selecione Membresía</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <?php 
+                 for($i=1; $i<count($cartillas); $i++){ ?>
+                  <tr>
+                    <td>Usuario: <?php echo $cartillas[$i]['cartilla']->user;  ?> | Plan:<?php
+                        echo $cartillas[$i]['cartilla']->nombre_plan?></td>
+
+                    <form action="?controller=Cartillas&action=crear" method="POST">
+                    <!--<td>
+                        <input class="form-control w-75 buscarRef2 float-left" id="exampleInputUser" name="referido" type="text"  placeholder="Usuario que refiere">
                         
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="exampleInputValorBono">Valor bono</label>
-                                <input class="form-control" id="exampleInputValorBono" type="text" name="valor_bono" aria-describedby="valor_bono" placeholder="Valor del bono para este plan">
-                            </div>
+                    </td>-->
+                    <td>
+                        <div class="input-group date fj-date">
+                            <input type="text" name="insc" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
-                        <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="exampleInputCant">Cantidad de usuarios para bono</label>
-                            <input class="form-control" id="exampleInputCant" type="text" name="cant_users" aria-describedby="cant_users" placeholder="Escri el número de usuarios para ganar el bono">
-                        </div>
-                    </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">*Avatar</label>
-                                <input class="form-control" id="exampleInputEmail1" type="file" name="avatar" 
-                                aria-describedby="file" 
-                                placeholder="Documento de identidad">
-                            </div>
-                        </div>
-                    </div>
-                  <div class="form-row">
-                    
-                    
-                  </div>
-                <button type="submit" class="btn btn-primary float-right cursor-pointer" >Crear</button>
-                <a href="javascript:history.back(1)" class="btn btn-success float-right cursor-pointer mr-2" >Regresar</a>
-            </form>
+                    </td>
+                    <td><select class="custom-select pt-0 pb-0 pr-4 pl-4" name="id_plan">
+                            <?php 
+                            $select=$cartillas[$i]['selectMembre'];
+                            
+                            for ($j=0; $j<count($select);$j++){ ?>
+                                <option value="<?php echo $select[$j]->id ?>"><?php echo $select[$j]->nombre_plan ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                    <td>        
+                        <input type="hidden" name="id_user" value="<?php echo $user[0]->id ?>">
+                        <input type="hidden" name="id_cartilla_padre" value="<?php echo $cartillas[$i]['cartilla']->id ?>">
+                        <button class="btn btn-success btn-options" data-toggle="tooltip" title="Seleccionar membresía como padre" >Seleccionar <i class="fa fa-arrow-right"></i></button>
+                    </td>
+                    </form>
+                </tr>
+              
+                      
+                 <?php } ?>
+              </tbody>
+            </table>
+          </div>
+          <?php } ?>
         </div>
       </div>
+      
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

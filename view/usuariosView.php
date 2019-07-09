@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-  <?php if(Session::get('level')=='admin'){  
+  <?php 
+  if(Session::get('level')=='admin'){  
     include "header.php";
   }else{
     include "headerSt.php"; 
@@ -13,7 +14,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="?controller=Main">Back Office</a>
+          <a href="?controller=Main" class="text-success">Back Office</a>
         </li>
         <li class="breadcrumb-item active">Usuarios </li>
       </ol>
@@ -24,9 +25,10 @@
           <a class="btn btn-success float-right" href="?controller=Usuarios&action=create">Nuevo Usuario</a></div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTableUser" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                    <th>ID Usuario</th>
                   <th>Usuario</th>
                   <th>Nombre</th>
                   <th>Email</th>
@@ -37,6 +39,7 @@
               </thead>
               <tfoot>
                 <tr>
+                    <th>ID Usuario</th>
                   <th>Usuario</th>
                   <th>Nombre</th>
                   <th>Email</th>
@@ -49,15 +52,42 @@
                 <?php 
                 foreach ($allusers as $user){ ?>
                 <tr>
-                    <td><?php echo $user->user?></td>
-                    <td><?php echo $user->name?></td>
-                    <td><?php echo $user->email?></td>
-                    <td><?php echo $user->telefono?></td>
-                    <td><?php echo $user->ciudad?></td>
+                    <td><?php echo $user['users']->id?></td>
+                    <td><?php echo $user['users']->user?></td>
+                    <td><?php echo $user['users']->name?></td>
+                    <td><?php echo $user['users']->email?></td>
+                    <td><?php echo $user['users']->telefono?></td>
+                    <td><?php echo $user['users']->ciudad;?></td>
                     <td>
-                        <a class="btn btn-danger btn-options" data-toggle="tooltip" title="Eliminar usuario" href="?controller=Usuarios&action=borrar&id=<?php echo $user->id ?>"><i class="fa fa-trash"></i></a>
-                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar usuario" href="?controller=Usuarios&action=show&id=<?php echo $user->id ?>"><i class="fa fa-pencil"></i></a>
-                        <a class="btn btn-primary btn-options" data-toggle="tooltip" title="Cartillas usuario"><i class="fa fa-bookmark"></i></a>
+                        <?php if(isset($user['idsCar'])){}else{ ?>
+                        <a class="btn btn-danger btn-options" data-toggle="modal" data-target="#<?php echo $user['users']->id ?>" title="Eliminar usuario" ><i class="fa fa-trash"></i></a>
+                        <?php   } ?>    
+                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar usuario" href="?controller=Usuarios&action=show&id=<?php echo $user['users']->id ?>"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-primary btn-options" data-toggle="tooltip" title="Mebresías usuario" href="?controller=Cartillas&action=index&id=<?php echo $user['users']->id ?>"><i class="fa fa-bookmark"></i></a>
+                        <a class="btn btn-success btn-options" data-toggle="tooltip" title="Crear membresía" href="?controller=Cartillas&action=create&id=<?php echo $user['users']->id?>"><i class="fa fa-plus"></i></a>
+                        <a class="btn btn-info" data-toggle="tooltip" title="Ver comisiones" href="?controller=Cartillas&action=showComision&id=<?php echo $user['users']->id?>"><i class="fa fa-usd"></i></a>
+                        <a class="btn btn-ttc btn-options" data-toggle="tooltip" title="Ver red" href="?controller=Cartillas&action=showRed&id=<?php echo $user['users']->id?>"><i class="fa fa-cubes"></i></a>
+                       
+                        
+                        <div class="modal fade" id="<?php echo $user['users']->id ?>" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-danger" id="exampleModalLabel">Eliminar Usuario</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  Esta seguro de eliminar el usuario?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                   <a class="btn btn-danger btn-options" data-toggle="tooltip" title="Eliminar usuario" href="?controller=Usuarios&action=borrar&id=<?php echo $user['users']->id ?>"><i class="fa fa-trash"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                         </div>
                     </td>
                 </tr>
                       
