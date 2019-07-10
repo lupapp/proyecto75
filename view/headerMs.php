@@ -26,7 +26,13 @@
     <a class="navbar-brand" href="<?php echo $helper->url("Main","index") ?>">
         <img src="view/img/mastercash200.png">
     </a>
-   
+    <nav class="">
+      <ul class="nav">
+        <?php foreach($categorias as $categoria){ ?>
+          <li><a class="text-color-white" href="?controller=Planes&action=showProducto&id_cat=<?php echo $categoria->id?>"><?php echo $categoria->nombre?></a></li>
+        <?php  } ?>
+      </ul>
+    </nav>
     <div class="collapse navbar-collapse" id="navbarResponsive">
      
      
@@ -42,11 +48,11 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
         <?php if(Session::get('autenticado')){ ?>
-            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePerfil" data-parent="#exampleAccordion">
+            <a class="nav-link nav-link-collapse collapsed float-left" data-toggle="collapse" href="#collapseExamplePerfil" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-user"></i>
               <span class="nav-link-text"><?php echo Session::get('user'); ?></span>
             </a>
-
+            
             <ul class="sidenav-second-level collapse" id="collapseExamplePerfil">
 
               <li>

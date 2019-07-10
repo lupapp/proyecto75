@@ -173,7 +173,7 @@ class EntidadBase{
     }
     public function getAllMembresia(){
 
-        $resultSet='';
+        $resultSet=[];
 
         $query=$this->db->query("SELECT * FROM $this->table WHERE tipo='1' ORDER BY id DESC");
 
@@ -189,7 +189,7 @@ class EntidadBase{
     
     public function getAllProductos(){
 
-	    $resultSet='';
+	    $resultSet=[];
 
         $query=$this->db->query("SELECT * FROM $this->table WHERE tipo='0' ORDER BY id DESC");
 
@@ -204,19 +204,31 @@ class EntidadBase{
     }
 
         public function getAllByTable($table){
-
+            $resultSet=[];
             $query=$this->db->query("SELECT * FROM $table ORDER BY id DESC");
 
-            /*while($row=$query->fetch_object()){
+            while($row=$query->fetch_object()){
 
                     $resultSet[]=$row;
 
-            }*/
+            }
 
-            return $query;
+            return $resultSet;
 
 	}
+    public function getAllCategoriasByTable($table){
+        $resultSet=[];
+        $query=$this->db->query("SELECT * FROM $table ORDER BY posicion DESC");
 
+        while($row=$query->fetch_object()){
+
+                $resultSet[]=$row;
+
+        }
+
+        return $resultSet;
+
+    }
         public function getAllByTableExclu($table, $exclu){
 
             $query=$this->db->query("SELECT * FROM $table WHERE id NOT IN($exclu) ORDER BY id DESC");
@@ -389,7 +401,7 @@ class EntidadBase{
 
          public function getIdcartillaXIduser($id_user){
 
-            $resul='';
+            $resul=[];
 
             $query=$this->db()->query("SELECT * FROM cartillas WHERE id_user=$id_user");
 
@@ -543,14 +555,13 @@ class EntidadBase{
 
             if($nivel<6){
 
-                $red='';
+                $red=[];
 
                 $query3=$this->db->query("SELECT *, cartillas.id AS idC FROM cartillas JOIN planes ON cartillas.id_plan=planes.id JOIN users ON cartillas.id_user = users.id WHERE id_padre=$id_user ORDER BY posicion ASC");
 
                 $i=0;
 
                 while($row3=$query3->fetch_object()){
-
                     $red[$i]= 
 
                         array(
@@ -1143,7 +1154,7 @@ class EntidadBase{
 
         public function getById($id){
 
-            $resultset='';
+            $resultset=[];
 
             $query=$this->db->query("SELECT * FROM $this->table WHERE id='$id'");
 
@@ -1160,12 +1171,12 @@ class EntidadBase{
 
 
         public function getByIdTable($id, $table){
-
+            $resultset=[];
             $query=$this->db->query("SELECT * FROM $table WHERE id=$id");
 
             if($row=$query->fetch_object()){
 
-                $resultset[]=$row;
+                $resultset=$row;
 
             }
 

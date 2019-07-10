@@ -177,6 +177,32 @@
         }
       }); 
     });*/
+    
+    $('.tipo').on('change',function(){
+        var valor=$(this).val();
+        if(valor==0){
+            $.ajax({
+                url: 'index.php?controller=categorias&action=getCategorias',
+                type: "GET",
+                dataType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var cat=JSON.parse(data.responseText);
+                    var categorias=cat.map((c)=>`<option value="${c.id}">${c.nombre}<li>`)
+                    alert(categorias);  
+                },
+                error: function(data){
+                    var cat=JSON.parse(data.responseText);
+                    var categorias=cat.map((c)=>`<option value="${c.id}">${c.nombre}<li>`);
+                    var options=categorias.toString();
+                    var stringOptions=options.replace(",", " ");
+                    var selectCat=`<label for="exampleInputEstado">*Categoria</label><select class="form-control tipo"   name="categoria" id="exampleInputEstado">${stringOptions}</select>`;
+                    $('.categorias').html(selectCat);
+                }
+            });
+        }else{
+            $('.categorias').html("");
+        }
+    });
     $('.btn-num-product-down').on('click', function(e){
         e.preventDefault();
         var numProduct = Number($(this).next().val());

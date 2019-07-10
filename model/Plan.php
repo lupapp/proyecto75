@@ -2,7 +2,7 @@
 
 class Plan extends EntidadBase{
 
-    private $id, $nombre_plan, $valor_plan, $descuento, $cant_hijos, $porcentaje1, $porcentaje2, $porcentaje3, $porcentaje4, $porcentaje5, $porcentaje_fondo, $dias_vencimiento, $estado, $tipo, $avatar_plan, $avatar_user, $valor_bono, $cant_users;
+    private $id, $nombre_plan, $categoria, $valor_plan, $descuento, $cant_hijos, $porcentaje1, $porcentaje2, $porcentaje3, $porcentaje4, $porcentaje5, $porcentaje_fondo, $dias_vencimiento, $estado, $tipo, $avatar_plan, $avatar_user, $valor_bono, $cant_users;
 
     public function __construct(){
 
@@ -24,7 +24,11 @@ class Plan extends EntidadBase{
 
     }
 
+    public function getCategoira() {
 
+        return $this->categoria;
+
+    }
 
     public function getValor_plan() {
 
@@ -170,7 +174,11 @@ class Plan extends EntidadBase{
 
     }
 
+    public function setCategoria($categoria) {
 
+        $this->categoria = $categoria;
+
+    }
 
     public function setValor_plan($valor_plan) {
 
@@ -273,9 +281,9 @@ class Plan extends EntidadBase{
 
     public function save(){
 
-        $query="INSERT INTO planes (id, nombre_plan, valor_plan, descuento, cant_hijos, porcentaje1, porcentaje2, porcentaje3, porcentaje4, porcentaje5, porcentaje_fondo, dias_vencimiento, estado, tipo, avatar_plan, avatar_user, valor_bono, cant_users) "
+        $query="INSERT INTO planes (id, nombre_plan, categoria valor_plan, descuento, cant_hijos, porcentaje1, porcentaje2, porcentaje3, porcentaje4, porcentaje5, porcentaje_fondo, dias_vencimiento, estado, tipo, avatar_plan, avatar_user, valor_bono, cant_users) "
 
-                ."VALUES (NULL, '".$this->nombre_plan."', '".$this->valor_plan."', '".$this->descuento."', '".$this->cant_hijos."', '".$this->porcentaje1."', '".$this->porcentaje2."' , '".$this->porcentaje3."', '".$this->porcentaje4."', '".$this->porcentaje5."',  '".$this->porcentaje_fondo."', '".$this->dias_vencimiento."',"
+                ."VALUES (NULL, '".$this->nombre_plan."','".$this->categoria."', '".$this->valor_plan."', '".$this->descuento."', '".$this->cant_hijos."', '".$this->porcentaje1."', '".$this->porcentaje2."' , '".$this->porcentaje3."', '".$this->porcentaje4."', '".$this->porcentaje5."',  '".$this->porcentaje_fondo."', '".$this->dias_vencimiento."',"
 
                 ."'".$this->estado."','".$this->tipo."','".$this->avatar_plan."', '".$this->avatar_user."', '".$this->valor_bono."', '".$this->cant_users."')";
 
@@ -287,7 +295,7 @@ class Plan extends EntidadBase{
 
     public function update(){
 
-        $query="UPDATE planes SET nombre_plan='".$this->nombre_plan."', valor_plan='".$this->valor_plan."', descuento='".$this->descuento."', cant_hijos='".$this->cant_hijos."',porcentaje1='".$this->porcentaje1."',"
+        $query="UPDATE planes SET nombre_plan='".$this->nombre_plan."',categoria='".$this->categoria."', valor_plan='".$this->valor_plan."', descuento='".$this->descuento."', cant_hijos='".$this->cant_hijos."',porcentaje1='".$this->porcentaje1."',"
 
                 ."porcentaje2='".$this->porcentaje2."', porcentaje3='".$this->porcentaje3."', porcentaje4='".$this->porcentaje4."', porcentaje5='".$this->porcentaje5."', porcentaje_fondo='".$this->porcentaje_fondo."', dias_vencimiento='".$this->dias_vencimiento."', estado='".$this->estado."', tipo='".$this->tipo."', avatar_plan='".$this->avatar_plan."',"
 

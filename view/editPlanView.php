@@ -112,7 +112,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="exampleInputEstado">*Tipo</label>
-                            <select class="form-control" name="tipo" id="exampleInputEstado">
+                            <select class="form-control tipo" name="tipo" id="exampleInputEstado">
                                 <?php
                                     if($plan->tipo==0){
                                         echo '<option value="'.$plan->tipo.'">Producto</option>';
@@ -122,6 +122,15 @@
                                 <option value="1">Membresía</option>
                                 <option value="0">Producto</option>
                             </select>
+                        </div>
+                    </div>
+                    <script>llenarCategorias();</script>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                        <label for="exampleInputEstado">*Categoria</label>
+                        <select class="form-control categorias"   name="categoria" id="exampleInputEstado">
+                            <option value="<?php echo $categoria->id?>"><?php echo $categoria->nombre?></option>
+                        </select>    
                         </div>
                     </div>
                     <div class="col-md-3">

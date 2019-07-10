@@ -33,6 +33,7 @@ class PlanesController extends ControladorBase{
     public function crear(){
         if(isset($_POST['plan'])){
             $nombre_plan=$_POST['plan'];
+            $categoria=$_POST['categoria'];
             $valor_plan=$_POST['valor_plan'];
             $descuento=$_POST['descuento'];
             $cant_hijos=$_POST['cant_hijos'];
@@ -57,6 +58,7 @@ class PlanesController extends ControladorBase{
             $plan->uploaded($avatar_plan);
             $plan->uploaded($avatar_user);
             $plan->setNombre_plan($nombre_plan);
+            $plan->setCategoria($categoria);
             $plan->setValor_plan($valor_plan);
             $plan->setDescuento($descuento);
             $plan->setCantHijos($cant_hijos);
@@ -101,7 +103,8 @@ class PlanesController extends ControladorBase{
             $plan=$plann->getById($id);
             //$porcentaje->setId_plan($id);
             //$porcen=$porcentaje->getPorcentajes($id);
-            $this->view("editPlan",array("plan" =>$plan));
+            $categoria=$plann->getByIdTable($plan->categoria, 'categorias');
+            $this->view("editPlan",array("plan" =>$plan,"categoria"=>$categoria));
         }else{
             $this->view("index",  array());
         }
@@ -112,8 +115,8 @@ class PlanesController extends ControladorBase{
             $plann=new Plan();
             //$porcentaje=new Porcentaje();
             $plan=$plann->getById($id);
-            //$porcen=$porcentaje->getPorcentajes($id);
-            $this->view("editPlan",array("plan" =>$plan));
+            $categoria=$plann->getByIdTable($plan->categoria, 'categorias');
+            $this->view("editPlan",array("plan" =>$plan, "categoria"=>$categoria));
         }else{
             $this->view("index",  array());
         }
@@ -122,6 +125,7 @@ class PlanesController extends ControladorBase{
         if($_POST['plan']){
             $id=$_POST['id'];
             $nombre=$_POST['plan'];
+            $categoria=$_POST['categoria'];
             $valor_plan=$_POST['valor_plan'];
             $cant_hijos=$_POST['cant_hijos'];
             $porcentajes=$_POST['porcentaje'];
@@ -157,6 +161,7 @@ class PlanesController extends ControladorBase{
             }
             $plan->setId($id);
             $plan->setNombre_plan($nombre);
+            $plan->setCategoria($categoria);
             $plan->setValor_plan($valor_plan);
             $plan->setDescuento($descuento);
             $plan->setCantHijos($cant_hijos);

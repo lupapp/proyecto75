@@ -93,10 +93,15 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="exampleInputEstado">*Tipo</label>
-                                <select class="form-control" name="tipo" id="exampleInputEstado">
+                                <select class="form-control tipo"   name="tipo" id="exampleInputEstado">
                                     <option value="1">Membresía</option>
                                     <option value="0"> Producto</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group categorias">
+                                
                             </div>
                         </div>
                     </div>

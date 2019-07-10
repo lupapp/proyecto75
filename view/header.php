@@ -18,6 +18,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Yanone+Kaffeesatz" rel="stylesheet">
   <script src="view/vendor/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="view/js/funciones.js"> </script>
 <?php
 $constantes=new Constantes();
 
@@ -99,6 +100,13 @@ $constantes=new Constantes();
           <a class="nav-link" href="<?php echo $helper->url("Planes") ?>">
             <i class="fa fa-fw fa-area-chart text-success"></i>
             <span class="nav-link-text">Membresías</span>
+          </a>
+            
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link" href="<?php echo $helper->url("categorias") ?>">
+            <i class="fa fa-tags text-success"></i>
+            <span class="nav-link-text">Categorías</span>
           </a>
             
         </li>
