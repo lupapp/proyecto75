@@ -10,10 +10,13 @@
 
     <div class="row">
 
-        <div class="col-md-2">
+        <div class="col-md-1">
+           
 
         </div>
-
+        <div class="col-md-2">
+        <?php include "navside.php"; ?>
+        </div>
         <div class="col-md-8">
 
             <div class="row">
@@ -118,9 +121,7 @@
 
                                                 $'.number_format($prod->valor_plan).'
 
-                                            </span>
-
-                                            <h6 class="alert alert-danger ">Debe tener membresías vigentes para poder comprar productos</h6>';
+                                            </span>';
 
                                         }
 

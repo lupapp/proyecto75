@@ -65,7 +65,9 @@ class MainController extends ControladorBase{
         $this->view("compra",  array('plan'=>$plan, 'producto'=>$producto));
 
     }
-
+    public function showCart(){
+        $this->view("cart",  array());
+    }
     public function showProductos(){
         $plan = new Plan;
         $productos = $plan->getAllProductos();

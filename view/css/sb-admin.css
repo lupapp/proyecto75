@@ -41,6 +41,146 @@ h3{
 .w-5{
     width:5%;
 }
+.mainNav{
+  padding:0;
+}
+.logoMain{
+  padding:10px 20px;
+}
+.pro:hover > .nav-shop{
+  /*display:block;*/
+}
+.cart-content{
+  border:0 solid #fff;
+}
+.item-list{
+  background:#ccc;
+  margin-bottom:15px;
+}
+.item-wrap{
+  margin-bottom: 0;
+  margin-top: 7px;
+  padding-bottom: 7px;
+  border-bottom: solid 3px #adadad;
+  margin-bottom:10px
+}
+.item-info p{
+  color:#055ead;
+  padding:5px 10px;
+}
+.item-info{
+  display:inline-block;
+}
+.blockResComp{
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+.info{
+  width:46%;
+}
+.qty{
+  width:14%;
+}
+.precio-unitario{
+  width:19%;
+}
+.precio-total{
+  width:19%;
+}
+.imgCart{
+  border: 1px solid #eee;
+  max-width: 140px;
+  height: 60px;
+}
+
+.nav-side{
+  border-right:#a5bdd3 solid 1px ;
+  border-left:#a5bdd3 solid 1px ;
+  background:#eee;
+}
+.nav-side a{
+  padding:5px 20px;
+  color:#055ead;
+  border-bottom:#a5bdd3 solid 1px;
+  width:100%;
+}
+.nav-side h2{
+  color:#055ead;
+  border-bottom:#055ead solid 3px;
+  padding:10px 20px;
+}
+.active{
+  background:#055ead;
+  color:#fff !important;
+}
+.cart{
+  position:relative;
+}
+.cart i{
+  font-size:32px;
+  color:#fff;
+}
+.cart .number{
+  position: absolute;
+    top: 0px;
+    right: -5px;
+    border: 1px solid #dd0021;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px 8px 8px 8px;
+    border-radius: 18px;
+    text-align: center;
+    background: #dd0021;
+    width: 22px;
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #fff;
+    display: inline-block;
+}
+.overlay{
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: 18px;
+  line-height: 1.8rem;
+  background: #000;
+  background: rgba(0,0,0,.5);
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+.nav-shop{
+  list-style:none;
+  position:absolute;
+  border-top:#a5bdd3 solid 1px ;
+  border-right:#a5bdd3 solid 1px ;
+  border-left:#a5bdd3 solid 1px ;
+  background:#eee;
+  display:none;
+}
+.nav-shop li a{
+  padding:2px 20px;
+  color:#055ead;
+  border-bottom:#a5bdd3 solid 1px;
+  width:100%;
+  display:block;
+}
+.white-space{
+  white-space:normal;
+}
+.nav-shop li a:hover{
+  background: #a5bdd3;
+  color:#00539b;
+}
+.nav-shop li{
+  float:none;
+}
 .nuevousuario{
   display:none;
 }

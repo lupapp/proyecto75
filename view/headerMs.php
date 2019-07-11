@@ -21,24 +21,30 @@
 </head>
 <?php $constantes=new Constantes(); ?>
 <body class="fixed-nav sticky-footer bg-white" id="page-top">
+  <?php include "modalcart.php"; ?>
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-blue fixed-top" id="mainNav">
-    <a class="navbar-brand" href="<?php echo $helper->url("Main","index") ?>">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-blue fixed-top mainNav" id="mainNav">
+    <a class="navbar-brand logoMain" href="<?php echo $helper->url("Main","index") ?>">
         <img src="view/img/mastercash200.png">
     </a>
-    <nav class="">
-      <ul class="nav">
-        <?php foreach($categorias as $categoria){ ?>
-          <li><a class="text-color-white" href="?controller=Planes&action=showProducto&id_cat=<?php echo $categoria->id?>"><?php echo $categoria->nombre?></a></li>
-        <?php  } ?>
-      </ul>
-    </nav>
+    
     <div class="collapse navbar-collapse" id="navbarResponsive">
      
      
       <ul class="navbar-nav ml-auto">
-        
-      
+        </li class="nav-item"> 
+              <?php include "cart.php" ?>
+        <li>
+        <li class="nav-item pro">
+          <a class="nav-link" data-target="#exampleModal" href="index.php?controller=Main&action=showProductos">
+                    <i class="fa fa-fw fa-arrow-down"></i>Productos
+          </a>
+          <ul class="nav-shop">
+            <?php foreach($categorias as $categoria){ ?>
+              <li><a class="text-color-white" href="?controller=Planes&action=showProducto&id_cat=<?php echo $categoria->id?>"><?php echo $categoria->nombre?></a></li>
+            <?php  } ?>
+          </ul>
+        </li>
         <li class="nav-item">
            
                 <a class="nav-link" data-target="#exampleModal" href="http://www.mastercash1.com">
@@ -72,7 +78,9 @@
                 <a class="nav-link" data-target="#exampleModal" href="?controller=Login">
                     <i class="fa fa-fw fa-sign-in" data-toggle="tooltip" title="Iniciar sesión"></i>Iniciar Sesión</a>
             <?php } ?>
-        </li>    
+        
+
+        </li>   
       </ul>
     </div>
   </nav>

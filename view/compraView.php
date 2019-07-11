@@ -53,31 +53,10 @@
                             <div class="form-row  pl-5 pr-5">
 
                                 <div class="row">
-                                    <div class="col-md-7 pl-1 pr-1">
-                                        <div class="form-group ">
-                                            <label class="w-100">*Método de pago</label>
-                                            <label class="radio-inline w-100 metodo-pago">
-                                                <img class="w-10 ml-2 " src="view/img/iconos_pagos.png"> <input  class="metodo" aria-describedby="metodo" type="radio" name="metodo" value="1">  Deposíto
-                                            </label>
-                                            <!--<label class="radio-inline w-30">
-                                                <img class="w-25 " src="view/img/paypal.png"> <input aria-describedby="metodo" type="radio" name="metodo" value="2">  PayPal
-                                            </label>-->
-                                            <label class="radio-inline w-100 metodo-pago">
-                                                <img class="w-10 ml-2" src="view/img/bitcoin.png"> <input class="metodo" aria-describedby="metodo" type="radio" name="metodo" value="3">  Bitcoins
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10 pl-1 pr-1">
-                                        <div class="form-group">
-                                            <label class="">No. Transacción o documento</label>
-                                            <input class="form-control documento"  type="text" name="documento" placeholder="Ingrese el número de transacción o documento">
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <hr>
+                            <hr>
                     <div class="container pl-5 pr-5 pt-3">
                         <div class="row">
                             <?php 
@@ -106,28 +85,28 @@
                                                 
                                         <hr>
                                         <div class="row pl-5 pr-5">
-                                            <div class="col-md-2 col-2">
+                                            <div class="col-md-3 col-2">
                                             
                                                 <input class="membresia" type="radio" name="id_cartilla" data-id_padre="<?php echo $cartilla[$i]['cartilla']->id_padre ?>" value="<?php echo $cartilla[$i]['cartilla']->id  ?>" <?php if($cartilla[$i]['vigencia']==1){}else{echo 'disabled';} ?>>
                                                 <?php echo $cartilla[$i]['cartilla']->id ?> 
                                             </div>
-                                            <div class="col-md-3 col-3">
+                                            <div class="col-md-9 col-3">
                                                 <?php echo $cartilla[$i]['cartilla']->fecha_creacion ?>
                                             </div>
                                             <?php if($cartilla[$i]['vigencia']==1){ ?>
-                                            <div class="col-md-3 col-3 text-success">
+                                            <div class="col-md-12 col-3 text-success">
                                                 Vigente
                                                 <?php echo $cartilla[$i]['cartilla']->fecha_vencimiento ?>
                                             </div>
                                             <?php }else{ ?>
-                                            <div class="col-md-3 col-3 text-danger">
+                                            <div class="col-md-12 col-3 text-danger">
                                                 No vigente
                                                 <?php echo $cartilla[$i]['cartilla']->fecha_vencimiento ?>
                                                 <a href="?controller=Cartillas&action=showRenovar&id=<?php echo $cartilla[$i]['cartilla']->id  ?>" class="text-primary">Renovar</a>
                                             </div>
                                             
                                             <?php  } ?>
-                                            <div class="col-md-3 col-3">
+                                            <div class="col-md-12 col-3">
                                                 <h4 for="exampleInputEmail1" class="text-primary"><?php echo $cartilla[$i]['plan']->nombre_plan ?></h4>
                                             </div>
                                         </div>
@@ -147,8 +126,8 @@
                                             </script>';
                                         }else{
                                             echo '
-                                            <div class="card  mx-auto w-75 mt-1">
-                                                    <a class="btn btn-danger btn-block"  >Debe tener membresías activas para comprar renueve</a>
+                                            <div class="card  mx-auto w-75 mt-1 mb-3 ">
+                                                    <a class="btn btn-danger white-space"  >Debe tener membresías activas para comprar renueve</a>
                                             </div>
                                             <script>
                                             $(document).ready(function(){
@@ -184,6 +163,10 @@
                             </div>
                         </div>
                     </div>
+                        </div>
+                        
+                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -1176,7 +1176,7 @@ class EntidadBase{
 
             if($row=$query->fetch_object()){
 
-                $resultset=$row;
+                $resultset[]=$row;
 
             }
 
