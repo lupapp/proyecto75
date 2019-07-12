@@ -177,7 +177,63 @@
         }
       }); 
     });*/
-    
+    /* Añadir al carrode compra */
+    $('.addCart').on('click', function(){
+        var id = $(this).data('id');
+        var valor = $('.valorP').val();
+        var valorneto=$(this).data('valor');
+        var name = $(this).data('nombre');
+        var img = $(this).data('img');
+        var cantidad = $('.cantidad').val();
+        var $id_user=$('.id_user').val();
+        var id_cartilla=$('input:radio[name=id_cartilla]:checked').val();
+        
+        $.ajax({
+            type: "POST",
+            url: "index.php?controller=main&action=addCart",
+            data: {
+                'id':id,
+                'valor':valor,
+                'valorneto':valorneto,
+                'nombre':name,
+                'img':img,
+                'cantidad':cantidad,
+                'id_user':$id_user,
+                'id_cartilla':id_cartilla
+            },
+            /*processData: false,  // tell jQuery not to process the data
+            contentType: false,   // tell jQuery not to set contentType*/
+            cache:false,
+            beforesend: function(){
+
+            },
+            error: function () {
+                alert("error petición ajax");
+            },
+            success: function (res) {
+                var producto =`
+                    <div class="row">
+                        <div class="col-md-1"><i class="fa fa-2x fa-check-circle-o checkAgregado checkCircle-infIcon"></i></div>
+                        <div class="col-md-2">
+                            <img src="view/img/${img}" class="img-thumbnail" alt="">
+                        </div>
+                        <div class="col-md-5">
+                            <p class="title-prod"><a href="index.php?Controller=Main&action=comprar&id=${id}">${name}</a></p>
+                            <p class="cantidad-prod">${cantidad}</p>
+                        </div>
+                        <div class="col-md-4">$ ${valor*cantidad}</div>
+                    </div>
+                `; 
+                $('.add-addCart-body').html(producto);
+                $('.overlay').fadeIn();
+                var cat=JSON.parse(res);
+                var cant=0;
+                cat.map((c)=>cant=cant+ parseInt(c.cant));
+                $('.number').text(cant);
+            }
+        });
+    });
+    /* final añadir al carro de compra */
     $('.tipo').on('change',function(){
         var valor=$(this).val();
         if(valor==0){

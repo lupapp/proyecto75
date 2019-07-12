@@ -73,7 +73,7 @@
 
                             <h2 class="block-txt p-t-20 text-center   ">
 
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                <a href="product-detail.html" class="block2-name dis-block s-text2 p-b-5">
 
                                     <?php echo $prod->nombre_plan ?>
 
@@ -137,7 +137,7 @@
 
                                     </span>
 
-                                    <h6 class="alert alert-danger ">Si tiene membresía activa inicie sesión para comprar con descuento.</h6>'; 
+                                    '; 
 
                                 }?>
 

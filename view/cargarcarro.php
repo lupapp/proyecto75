@@ -4,8 +4,6 @@ $cantidad=0;
 $ds = DIRECTORY_SEPARATOR;  //1
 $storeFolder = 'art';   //2
 if(isset($_SESSION['carrito'])){
-
-
     if(isset($_POST['id_delete'])){
         $arreglo=$_SESSION['carrito'];
         $idDelete=$_POST['id_delete'];

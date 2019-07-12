@@ -3,10 +3,11 @@
   <div class="container ">
         <div class="card mx-auto mt-5 cart-content">
             <div class="card-header">
-                <h3 class="float-left"><i class="fa fa-shopping-cart"></i> Carrito de producto</h3>
+                <h3 class="float-left"><i class="fa fa-shopping-cart"></i> Carro de compras</h3>
                 <a href="javascript:history.back(1)" class="btn btn-primary float-right cursor-pointer mr-2" >Regresar</a>
             </div>
             <div class="cartItem">
+                <?php if(Session::get('carrito')){ ?>
                 <div class="top-cart">
                     <div class="item-list">
                         <div class="item-info info">
@@ -23,61 +24,96 @@
                         </div>
                     </div>
                 </div>
+                <?php 
+                
+                $carrito = Session::get('carrito');
+                print_r($carrito);
+                foreach($carrito as $c){?>
                 <div class="item-wrap">
                     <div class="item-all">
                         <div class="item-info info">
-                            <ul>
-                                <li><img src="view/img/glutacash.jpg" alt="" class="imgCart"></li>
-                                <div>GlutaCash</div>
+                            <ul class="inline-block">
+                                <li class="img-thumbnail"><img src="view/img/<?php echo $c['img'] ?>" alt="" class="imgCart"></li>
+                                
                             </ul>
-
+                            <div class="nombreItem inline-block"><?php echo $c['nombre'] ?></div>
                         </div>
                         <div class="item-info qty">
-                            <input type="tel" value="1">
-                            <div>
-                                <span>+</span>
-                                <span>-</span>
+                            <input class="form-control input-qty" type="tel" value="<?php echo $c['cant'] ?>">
+                            <div class="btns-masmenos">
+                                <button class="btn btn-default btn-up"><i class="fa fa-plus"></i></button>
+                                <button class="btn btn-default btn-down"><i class="fa fa-minus"></i></button>
+                            </div>
+                            <div class="deleteItem">
+                                <button class="btn btn-link">Eliminar</button>
                             </div>
                         </div>
                         <div class="item-info precio-unitario">
-                            <p>$ <span>30</span></p>
+                            <p class="bold-text sizeText15">$ <span><?php echo $c['price'] ?> </span>c/u</p>
                         </div>
                         <div class="item-info precio-total">
-                            <p>$ <span>30</span></p>
+                            <p class="bold-text sizeText15">$ <span><?php echo $c['total'] ?></span></p>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <div class="row blockResComp">
                     <div class="col-8 col-md-8">
+                        
                         <div class="form-group ">
                             <label class="w-100">*Método de pago</label>
-                            <label class="radio-inline w-100 metodo-pago">
-                                <img class="w-10 ml-2 " src="view/img/iconos_pagos.png"> <input  class="metodo" aria-describedby="metodo" type="radio" name="metodo" value="1">  Deposíto
+                            <label class="radio-inline w-75 metodo-pago">
+                                <img class="w-5 ml-2 " src="view/img/iconos_pagos.png"> <input  class="metodo" aria-describedby="metodo" type="radio" name="metodo" value="1">  Deposíto
                             </label>
                             <!--<label class="radio-inline w-30">
                                 <img class="w-25 " src="view/img/paypal.png"> <input aria-describedby="metodo" type="radio" name="metodo" value="2">  PayPal
                             </label>-->
-                            <label class="radio-inline w-100 metodo-pago">
-                                <img class="w-10 ml-2" src="view/img/bitcoin.png"> <input class="metodo" aria-describedby="metodo" type="radio" name="metodo" value="3">  Bitcoins
+                            <label class="radio-inline w-75 metodo-pago">
+                                <img class="w-5 ml-2" src="view/img/bitcoin.png"> <input class="metodo" aria-describedby="metodo" type="radio" name="metodo" value="3">  Bitcoins
                             </label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group w-75">
                             <label class="">No. Transacción o documento</label>
                             <input class="form-control documento"  type="text" name="documento" placeholder="Ingrese el número de transacción o documento">
                         </div>
                     </div>
                     <div class="col-4 col-md-4">
-                        <table>
+                        <table class="totalCompra">
                             <tr>
                                 <td>Total a Pagar:</td>
-                                <td>$ 30</td>
+                                <td class="bold-text">$ 30</td>
                             </tr>
                         </table>
-                        <div>
-                            <a href="" class="btn btn-success">Comprar</a>
+                        <div class="btnFinalCompra">
+                            <a href="?controller=Cartillas&action=pedido" class="btn btn-success w-100">Comprar</a>
+                            <a href="index.php?controller=Main&action=showProductos" class="btn btn-light w-100">Ver mas productos</a>
                         </div>
+                        <div class="col-md-12 col-10">
+                            <div class="checkbox">
+                                <label style="font-size: 1em">
+                                    <input type="checkbox" name="terminos" value="1" checked>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                    <span class="font-weight-bold">Acepto Terminos</span>
+                                    <p>El registro de la membresía esta sujeta a revisión y aprobación, despues de registrada la membresía debe de ingresar el número de transacción o documento de deposito, para hacer efectivo el registro.</p>
+                                </label>
+                            </div>
+                        </div>
+                
                     </div>
                 </div>
+                <?php }else{ ?>
+                    <section class="empty-cart">
+                        <i class="fa fa-shopping-cart fa-5x"></i>
+                        <p class="title bold-text">
+                            Carro de compras vacío.</p>
+        
+                        <p>
+                                   <a class="btn btn-link" href="index.php?controller=Main&action=showProductos" >Ver productos </a></p>
+                            <div class="pt-15 more-ac">
+                            <a href="index.php" rel="nofollow" class="btn btn-light withBtnComprar">Volver al Home</a>
+                        </div>
+                    </section>
+                <?php } ?>
             </div>
             
           

@@ -3,7 +3,7 @@ class Session{
     public static function init(){
         session_start();
     }
-     public static function destroy($calve=false){
+     public static function destroy($clave=false){
         if($clave){
             if(is_array($clave)){
                 for ($i=0;$i<count($clave);$i++){

@@ -2,12 +2,12 @@
   $constante= new Constantes();?>
     <link rel="stylesheet" type="text/css" href="view/tienda/css/main.css">
   <div class="container">
-    <form id="loginForm" action="?controller=Cartillas&action=pedido" method="POST"  class="form-horizontal" >
         <div class="card mx-auto mt-5">
             <div class="card-header">
-                <i class="fa fa-shopping-cart"></i> Compra de producto
+                <h3><i class="fa fa-shopping-cart"></i> Detalles del producto</h3>
                 <a href="javascript:history.back(1)" class="btn btn-primary float-right cursor-pointer mr-2" >Regresar</a>
             </div>
+            <?php $carrito=Session::get('carrito');?>
             <div class="container bgwhite p-t-35 p-b-80">
                 <div class="flex-w flex-sb">
                     <div class="w-size13 p-t-30 respon5">
@@ -22,6 +22,7 @@
                             </div>
                         </div>
                     </div>
+                    <form action="" id="loginForm"></form>
                     <div class="w-size14 p-t-30 respon5">
                         <div class="row">
                             <div class="col-md-6 pl-5">
@@ -39,11 +40,11 @@
                                         <a class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                                             <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                         </a>
-                                        <input class="size8 m-text18 t-center num-product"  name="cantidad" value="1">
+                                        <input class="size8 m-text18 t-center num-product cantidad"  name="cantidad" value="1">
                                         <a class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                             <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                                         </a>
-                                        <input type="hidden" name="id_plan" value="<?php echo $producto[0]->id ?>">
+                                       
                                         <input type="hidden" class="valorP" name="valor" value="<?php echo $producto[0]->valor_plan ?>">
                                     </div>
                                 </div>
@@ -60,6 +61,8 @@
                     <div class="container pl-5 pr-5 pt-3">
                         <div class="row">
                             <?php 
+                            $c=false;
+                            $v=false;
                             if(Session::get('autenticado')){  
                                 $cantmen=count(Session::get('membresias'));
                                 $cartilla=Session::get('membresias');
@@ -69,9 +72,10 @@
                                 } else {
                                     $car = 'Membresía';
                                 } 
-                                if(count($cartilla)>1){ ?>
+                                if(count($cartilla)>1){ 
+                                    $c=true ?>
                                     <div class="card mb-4 w-100 mx-auto" >
-                                    <input type="hidden" name="id_user" value="<?php echo Session::get('id') ?>">
+                                    <input type="hidden" class="id_user" name="id_user" value="<?php echo Session::get('id') ?>">
                                     <div class="card-header">
                                     *Usted tiene <?php echo $canti . ' ' . $car ?> seleccione una
                                     </div>
@@ -123,11 +127,14 @@
                                                 $(".valorProducto").text('.number_format($valor).');
                                                 $(".valorP").val('.number_format($valor).');
                                             });
-                                            </script>';
-                                        }else{
+                                            </script>'; ?>
+                                            <div class="col-md-10 mx-auto w-75 col-10">
+                                                <button data-img="<?php echo $producto[0]->avatar_plan ?>" data-nombre="<?php echo $producto[0]->nombre_plan ?>" data-valor="<?php echo $producto[0]->valor_plan ?>" data-id="<?php echo $producto[0]->id ?>" class="btn btn-success w-100 cursor-pointer addCart" >Añadir al carrito</button>
+                                            </div>
+                                        <?php }else{
                                             echo '
                                             <div class="card  mx-auto w-75 mt-1 mb-3 ">
-                                                    <a class="btn btn-danger white-space"  >Debe tener membresías activas para comprar renueve</a>
+                                                    <a class="btn btn-danger white-space"  >Debe tener membresías activas para descuento renueve</a>
                                             </div>
                                             <script>
                                             $(document).ready(function(){
@@ -136,41 +143,31 @@
                                             </script>';
                                         }?>
                                     <?php 
-                                }else{ ?>
-                                    <input type="hidden" name="usuarioRegular" value="1">
-                                    <input type="hidden" name="id_user" value="<?php echo Session::get('id') ?>">
-                                <?php }
+                                    }else{ ?>
+                                        <input type="hidden" name="usuarioRegular" value="1">
+                                        <input type="hidden" class="id_user" name="id_user" value="<?php echo Session::get('id') ?>">
+                                        <input type="hidden" name="id_cartilla">
+                                        <div class="col-md-10 mx-auto w-75 col-10">
+                                            <button data-img="<?php echo $producto[0]->avatar_plan ?>" data-nombre="<?php echo $producto[0]->nombre_plan ?>" data-valor="<?php echo $producto[0]->valor_plan ?>" data-id="<?php echo $producto[0]->id ?>" class="btn btn-success w-100 cursor-pointer addCart" >Añadir al carrito</button>
+                                        </div>
+                                    <?php }
 
                                 } else{ ?>
-                                <div class="card  mx-auto w-75 mt-1">
+                                <div class="card  mx-auto w-75 mt-1 mb-3">
                                         <a href="?controller=Login" class="btn btn-primary btn-block"  >Inicie sesión para comprar</a>
                                 </div>
                             <?php }?>
                        
-                            <div class="col-md-12 col-10">
-                                <div class="checkbox">
-                                    <label style="font-size: 1em">
-                                        <input type="checkbox" name="terminos" value="1" checked>
-                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        <span class="font-weight-bold">Acepto Terminos</span>
-                                        <p>El registro de la membresía esta sujeta a revisión y aprobación, despues de registrada la membresía debe de ingresar el número de transacción o documento de deposito, para hacer efectivo el registro.</p>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-1"></div>
-                            <div class="col-md-4 col-10">
-                                <button type="submit" class="btn btn-success w-100  cursor-pointer submit" >Completar compra</button>
-                            </div>
+                            
                         </div>
                     </div>
                         </div>
                         
                     </div>
-                    
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
   </div>
 
   <!-- Bootstrap core JavaScript-->

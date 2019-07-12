@@ -18,3 +18,6 @@ function llenarCategorias(){
         }
     });
 }
+function closeMiniCart(){
+    $('.overlay').fadeOut();
+}
