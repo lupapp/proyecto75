@@ -53,88 +53,160 @@ class MainController extends ControladorBase{
         $this->view("registerUser",  array('plan'=>$plan));
 
     }
+    public function deleteCart(){
+        Session::destroy('carrito');
+        return true;
+    }
     public function addCart(){
         if(Session::get('carrito')){
-            if(isset($_POST['id_delete'])){
+            if(isset($_POST['control']) && $_POST['control']==1){
                 $arreglo=Session::get('carrito');
-                $idDelete=$_POST['id_delete'];
+                $idDelete=$_POST['id'];
                 for($i=0;$i<count($arreglo);$i++){
-                    if($arreglo[$i]['id_cart']==$idDelete){
+                    if ($arreglo[$i]['id'] == $idDelete && $arreglo[$i]['id_cartilla']==$_POST['id_cartilla']){
                         unset($arreglo[$i]);
                         $arreglo=array_values($arreglo);
                         Session::set('carrito',$arreglo);
                     }
                 }
                 if(count($arreglo)==0){
-                        Session::set('carrito',$arreglo);
-                        Session::destroy('carrito');
-                        echo"<center>No hay productos</center>";
-        
+                    Session::set('carrito',$arreglo);
+                    Session::destroy('carrito');
+                    echo 0;
+                }else{
+                    echo json_encode(Session::get('carrito'));        
                 }
             }
-            if($_POST['nombre']!=''){
-                    
-                    $arreglo=Session::get('carrito');
-                    $encontrado = false;
-                    $numero = 0;
-                    $contador = 0;
-        
-                    for ($i = 0; $i < count($arreglo); $i++) {
-                        if ($arreglo[$i]['id'] == $_POST['id']) {
-                            $encontrado = true;
-                            $numero = $i;
+            if(isset($_POST['control']) && $_POST['control']==2){
+                $arreglo=Session::get('carrito');
+                $encontrado=false;
+                $numero=0;
+                $idMenos=$_POST['id'];
+    
+                for($i=0;$i<count($arreglo);$i++){
+                    if($arreglo[$i]['id'] == $idMenos && $arreglo[$i]['id_cartilla']==$_POST['id_cartilla']){
+                        if($arreglo[$i]['cant']==1){
+                            unset($arreglo[$i]);
+                            $arreglo=array_values($arreglo);
+                            Session::set('carrito',$arreglo);
+                        }else{
+                            $arreglo[$i]['cant']--;
+                            $total=$arreglo[$i]['cant']*$arreglo[$i]['price'];
+                            $arreglo[$i]['total']=$total;
+                            Session::set('carrito',$arreglo);
                         }
                     }
-        
-                    if ($encontrado == true) {
-                        $total=($arreglo[$numero]['cant'] + $_POST['cantidad'])*$arreglo[$numero]['price'];
-                        $totalneto=($arreglo[$numero]['cant'] + $_POST['cantidad'])*$arreglo[$numero]['priceneto'];
-                        $arreglo[$numero]['cant'] = $arreglo[$numero]['cant'] + $_POST['cantidad'];
-                        $arreglo[$numero]['total']=$total;
-                        $arreglo[$numero]['totalneto']=$totalneto;
-                        Session::set('carrito',$arreglo);
-                    } else {
-                        $arreglo=Session::get('carrito');
-                        $id = $_POST['id'];
-                        $id_user=$_POST['id_user'];
-                        $id_cartilla=$_POST['id_cartilla'];
-                        $nombre = $_POST['nombre'];
-                        $cant = $_POST['cantidad'];
-                        $price = $_POST['valor'];
-                        $priceneto=$_POST['valorneto'];
-                        $img = $_POST['img'];
-                        $total=$price*$cant;
-                        $totalneto=$priceneto*$cant;
-                        
-                        $arregloNuevo = array(
-                            'id' => $id,
-                            'id_user'=>$id_user,
-                            'id_cartilla'=>$id_cartilla,
-                            'nombre' => $nombre,
-                            'cant' => $cant,
-                            'priceneto', $priceneto,
-                            'price' => $price,
-                            'img' => $img,
-                            'totalneto'=>$totalneto,
-                            'total' => $total
-                        );
-                        echo json_encode($arreglo);
-                        array_push($arreglo, $arregloNuevo);
+                }			
+                if(count($arreglo)==0){
+                    Session::set('carrito',$arreglo);
+                    Session::destroy('carrito');
+                    echo 0;
+                }else{
+                    echo json_encode(Session::get('carrito'));
+                }
+            }
+            if(isset($_POST['control']) && $_POST['control']==3){
+                $arreglo=Session::get('carrito');
+                $idMas=$_POST['id'];
+                for($i=0;$i<count($arreglo);$i++){			
+                    if($arreglo[$i]['id'] == $idMas && $arreglo[$i]['id_cartilla']==$_POST['id_cartilla']){
+                        $arreglo[$i]['cant']++;
+                        $total=$arreglo[$i]['cant'] *$arreglo[$i]['price'];
+                        $arreglo[$i]['total']=$total;
                         Session::set('carrito',$arreglo);
                     }
-        
+                }
+                echo json_encode(Session::get('carrito'));
             }
-            echo json_encode(Session::get('carrito'));
+            if(isset($_POST['control']) && $_POST['control']==4){
+                $arreglo=Session::get('carrito');
+                $id=$_POST['id'];
+                $valor=$_POST['valor'];
+                
+                for($i=0;$i<count($arreglo);$i++){
+                    if ($arreglo[$i]['id'] == $id && $arreglo[$i]['id_cartilla']==$_POST['id_cartilla']){
+                        if($valor<=0){
+                            Session::set('carrito',$arreglo);
+                            Session::destroy('carrito');
+                            echo 0;
+                        }else{
+                            $arreglo[$i]['cant']=$valor;
+                            $total=$arreglo[$i]['cant'] *$arreglo[$i]['price'];
+                            $arreglo[$i]['total']=$total;
+                            Session::set('carrito',$arreglo);
+                            echo json_encode(Session::get('carrito'));   
+                        }
+                    }
+                }
+            }
+            if(isset($_POST['nombre'])){
+                    
+                $arreglo=Session::get('carrito');
+                $encontrado = false;
+                $numero = 0;
+                $contador = 0;
+    
+                for ($i = 0; $i < count($arreglo); $i++) {
+                    if ($arreglo[$i]['id'] == $_POST['id'] && $arreglo[$i]['id_cartilla']==$_POST['id_cartilla']) {
+                        $encontrado = true;
+                        $numero = $i;
+                    }
+                }
+    
+                if ($encontrado == true) {
+                    $total=($arreglo[$numero]['cant'] + $_POST['cantidad'])*$arreglo[$numero]['price'];
+                    $totalneto=($arreglo[$numero]['cant'] + $_POST['cantidad'])*$arreglo[$numero]['priceneto'];
+                    $arreglo[$numero]['cant'] = $arreglo[$numero]['cant'] + $_POST['cantidad'];
+                    $arreglo[$numero]['total']=$total;
+                    $arreglo[$numero]['totalneto']=$totalneto;
+                    Session::set('carrito',$arreglo);
+                } else {
+                    $arreglo=Session::get('carrito');
+                    $id = $_POST['id'];
+                    $id_user=$_POST['id_user'];
+                    $id_cartilla=$_POST['id_cartilla'];
+                    $id_padre=$_POST['id_padre'];
+                    $nombre = $_POST['nombre'];
+                    $cant = $_POST['cantidad'];
+                    $price = $_POST['valor'];
+                    $priceneto=$_POST['valorneto'];
+                    $img = $_POST['img'];
+                    $tipoUser=$_POST['tipouser'];
+                    $total=$price*$cant;
+                    $totalneto=$priceneto*$cant;
+                    
+                    $arregloNuevo = array(
+                        'id' => $id,
+                        'id_user'=>$id_user,
+                        'id_cartilla'=>$id_cartilla,
+                        'id_padre'=>$id_padre,
+                        'nombre' => $nombre,
+                        'cant' => $cant,
+                        'tipoUser'=>$tipoUser,
+                        'priceneto'=> $priceneto,
+                        'price' => $price,
+                        'img' => $img,
+                        'totalneto'=>$totalneto,
+                        'total' => $total
+                    );
+                    array_push($arreglo, $arregloNuevo);
+                    Session::set('carrito',$arreglo);
+                }
+                echo json_encode(Session::get('carrito'));
+            }
+            
         }else{
             if($_POST['nombre']!=''){
                 $id = $_POST['id'];
                 $id_user=$_POST['id_user'];
                 $id_cartilla=$_POST['id_cartilla'];
+                $id_padre=$_POST['id_padre'];
                 $nombre = $_POST['nombre'];
                 $cant = $_POST['cantidad'];
                 $price = $_POST['valor'];
                 $priceneto=$_POST['valorneto'];
                 $img = $_POST['img'];
+                $tipoUser=$_POST['tipouser'];
                 $total=$price*$cant;
                 $totalneto=$priceneto*$cant;
 
@@ -142,9 +214,11 @@ class MainController extends ControladorBase{
                     'id' => $id,
                     'id_user'=>$id_user,
                     'id_cartilla'=>$id_cartilla,
+                    'id_padre'=>$id_padre,
                     'nombre' => $nombre,
                     'cant' => $cant,
-                    'priceneto', $priceneto,
+                    'tipoUser'=>$tipoUser,
+                    'priceneto'=> $priceneto,
                     'price' => $price,
                     'img' => $img,
                     'totalneto'=>$totalneto,
@@ -172,8 +246,14 @@ class MainController extends ControladorBase{
     }
     public function showProductos(){
         $plan = new Plan;
-        $productos = $plan->getAllProductos();
         $categorias=$plan->getAllCategoriasByTable('categorias');
+        if(isset($_GET['id_cat'])){
+            $id_cat=$_GET['id_cat'];
+            $productos=$plan->getProdByCat($id_cat);
+        }else{
+            $productos = $plan->getAllProductos();
+        }
+        
         $this->view("shop", array('productos' => $productos,'categorias'=>$categorias));
     }
 

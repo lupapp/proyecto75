@@ -125,6 +125,12 @@
 
                                         }
 
+                                    }else{
+                                        echo '<span class="block2-price m-text20 p-r-5 valorPro">
+
+                                            $'.number_format($prod->valor_plan).'
+
+                                        </span>';
                                     }
 
     

@@ -8,7 +8,7 @@
             </div>
             <div class="add-addcart-footer">
                 <a class="btn btn-success pull-right" href="?controller=Main&action=showCart">Ir al carrito de compras</a>
-                <div class="btn btn-link pull-right" onclick="closeMiniCart()">Ver más productos</div>
+                <a href="index.php?controller=Main&action=showProductos" class="btn btn-link pull-right" onclick="closeMiniCart()">Ver más productos</a>
             </div>
         </div>
     </div>

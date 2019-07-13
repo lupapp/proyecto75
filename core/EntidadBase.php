@@ -129,48 +129,44 @@ class EntidadBase{
 
 
     public function getPagoByid($id){
-
         $query=$this->db->query("SELECT * FROM pagos WHERE id=$id");
-
         while($row=$query->fetch_object()){
-
             $query2=$this->db->query("SELECT * FROM cartillas WHERE id_user=$row->id_cartilla_paga");
-
             if($row2=$query2->fetch_object()){
-
                 $cartilla=$row2;
-
             }else{
-
                 $cartilla=0;
-
             }
-
             $query2=$this->db->query("SELECT * FROM users WHERE id=$row->id_user");
-
             if($row2=$query2->fetch_object()){
-
                 $user=$row2;
-
             }
-
             $query2=$this->db->query("SELECT * FROM planes WHERE id=$row->id_plan");
-
             if($row2=$query2->fetch_object()){
-
                 $plan=$row2;
-
             }
-
-            $cantidad=$row->valor/$plan->valor_plan;
-
             $resultSet=array("pago"=>$row, "cartilla"=>$cartilla, 'plan'=>$plan, 'user'=>$user, 'cantidad'=>$cantidad);
-
         }
-
         return $resultSet;
-
     }
+
+    public function getPedidoByid($id){
+        $query=$this->db->query("SELECT * FROM pedidos WHERE id=$id");
+        while($row=$query->fetch_object()){
+            $query2=$this->db->query("SELECT * FROM lineas_pedido WHERE pedido=$row->id");
+            while($row2=$query2->fetch_object()){
+                $lineas[]=$row2;
+            }
+            $query2=$this->db->query("SELECT * FROM users WHERE id=$row->id_user");
+            if($row2=$query2->fetch_object()){
+                $user=$row2;
+            }
+            
+            $resultSet=array("pedido"=>$row, "lineas"=>$lineas, 'user'=>$user);
+        }
+        return $resultSet;
+    }
+
     public function getAllMembresia(){
 
         $resultSet=[];
@@ -1045,7 +1041,14 @@ class EntidadBase{
             }
             return;
         }
-
+        public function getProdByCat($id_cat){
+            $resultSet=[];
+            $query=$this->db->query("SELECT * FROM planes WHERE categoria=$id_cat AND tipo=0 ORDER BY id DESC");
+            while($row=$query->fetch_object()){
+                    $resultSet[]=$row;
+            }
+            return $resultSet;
+        }
         public function generarComisionesReferido($valor, $id_cartilla, $referido){
 
             $fecha=date('Y')."-".date('m')."-".date('j');
@@ -1522,9 +1525,9 @@ class EntidadBase{
 
         public function savePedido($data){
 
-            $query="INSERT INTO pedidos (id, id_user, id_cartilla, id_prod, fecha, cantidad , valor, metodo, estado) "
+            $query="INSERT INTO pedidos (id, id_user, id_cartilla, id_prod, id_pago, fecha, cantidad , valor, metodo, estado) "
 
-                ."VALUES (NULL, '".$data['id_user']."', '".$data['id_cartilla']."', '".$data['id_prod']."', '".$data['fecha']."', '".$data['cantidad']."', '".$data['valor']."',"
+                ."VALUES (NULL, '".$data['id_user']."', '".$data['id_cartilla']."', '".$data['id_prod']."', '".$data['id_pago']."', '".$data['fecha']."', '".$data['cantidad']."', '".$data['total']."',"
 
                 ."'".$data['metodo']."','0')";
 
@@ -1533,7 +1536,26 @@ class EntidadBase{
             return $this->db();
 
         }
+        public function getPedidoByIdpago($id){
+            $query=$this->db->query("SELECT * FROM pedidos WHERE id_pago=$id");
+            while($row=$query->fetch_object()){
+                $pedido=$row;    
+            }
+            return $pedido;
+        }
+        public function getLineasByPedido($id){
+            $query2=$this->db->query("SELECT * FROM lineas_pedido WHERE pedido=$id");
+            while($row2=$query2->fetch_object()){
+                $lineas[]=$row2;
+            }
+            return $lineas;
+        }
+        public function saveLineasPedido($data){
 
+            $query="INSERT INTO lineas_pedido (id, pedido, id_plan, id_cartilla, precio, cantidad, total) VALUES (NULL, '".$data['pedido']."', '".$data['id_prod']."', '".$data['id_cartilla']."', '".$data['precio']."', '".$data['cantidad']."', '".$data['total']."')";
+            $save=$this->db()->query($query);
+            return $this->db();
+        }
         public function envioMail($datos){
 
             mail($datos['destinatario'],$datos['asunto'],$datos['cuerpo'],$datos['headers']);

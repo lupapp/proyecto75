@@ -4,10 +4,10 @@ class RespuestasController extends ControladorBase{
         parent::__construct();
     }
     public function compraProducto(){
-        $pagos=new Pagos();
-        $ulped=$pagos->getUltimoRegistro('pagos');
-        $pag=$pagos->getPagoById($ulped->id);
-        $this->view("pedidofinalizado", array("pago"=> $pag ));
+        $pedidos=new Pedido();
+        $ulped=$pedidos->getUltimoRegistro('pedidos');
+        $pedido=$pedidos->getPedidoById($ulped->id);
+        $this->view("pedidofinalizado", array("pedido"=> $pedido ));
     }
     public function cambioEstadoExitoso(){
         $this->view("mensajeExito", array("mensaje"=>"<span class='text-success'>TODO BIEN!</span><br> Cambio de estado exitoso", "link"=>"<meta http-equiv='Refresh' content='3; url=?controller=Main' />", "linkBoton"=>"?controller=Usuarios"));

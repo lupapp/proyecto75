@@ -3,20 +3,14 @@
     <?php
         $i=1; 
         foreach($categorias as $categoria){ 
-            if(isset($catselect)){
-                if($catselect==$categoria->id){
+            if(isset($_GET['id_cat'])){
+                if($_GET['id_cat']==$categoria->id){
                     $class="active";
                 }else{
                     $class="";
                 }
-            }else{
-                if($i==1){
-                    $class='active';
-                }else{
-                    $class='';
-                }
             }?>
-            <a class="nav-link <?php echo $class ?>" href="?controller=Planes&action=showProducto&id_cat=<?php echo $categoria->id?>"><?php echo $categoria->nombre?></a>
+            <a class="nav-link <?php echo $class ?>" href="?controller=Main&action=showProductos&id_cat=<?php echo $categoria->id?>"><?php echo $categoria->nombre?></a>
         <?php  
         $i++;
         } ?>

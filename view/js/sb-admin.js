@@ -177,32 +177,12 @@
         }
       }); 
     });*/
-    /* Añadir al carrode compra */
-    $('.addCart').on('click', function(){
-        var id = $(this).data('id');
-        var valor = $('.valorP').val();
-        var valorneto=$(this).data('valor');
-        var name = $(this).data('nombre');
-        var img = $(this).data('img');
-        var cantidad = $('.cantidad').val();
-        var $id_user=$('.id_user').val();
-        var id_cartilla=$('input:radio[name=id_cartilla]:checked').val();
-        
+    /* vaciar carrito de compra*/
+    $('.vaciarCart').on('click', function(){
         $.ajax({
             type: "POST",
-            url: "index.php?controller=main&action=addCart",
-            data: {
-                'id':id,
-                'valor':valor,
-                'valorneto':valorneto,
-                'nombre':name,
-                'img':img,
-                'cantidad':cantidad,
-                'id_user':$id_user,
-                'id_cartilla':id_cartilla
-            },
-            /*processData: false,  // tell jQuery not to process the data
-            contentType: false,   // tell jQuery not to set contentType*/
+            url: "index.php?controller=main&action=deleteCart",
+            data: false,
             cache:false,
             beforesend: function(){
 
@@ -211,27 +191,180 @@
                 alert("error petición ajax");
             },
             success: function (res) {
-                var producto =`
-                    <div class="row">
-                        <div class="col-md-1"><i class="fa fa-2x fa-check-circle-o checkAgregado checkCircle-infIcon"></i></div>
-                        <div class="col-md-2">
-                            <img src="view/img/${img}" class="img-thumbnail" alt="">
-                        </div>
-                        <div class="col-md-5">
-                            <p class="title-prod"><a href="index.php?Controller=Main&action=comprar&id=${id}">${name}</a></p>
-                            <p class="cantidad-prod">${cantidad}</p>
-                        </div>
-                        <div class="col-md-4">$ ${valor*cantidad}</div>
+                var vacio =`
+                <section class="empty-cart">
+                    <i class="fa fa-shopping-cart fa-5x"></i>
+                    <p class="title bold-text">
+                        Carro de compras vacío.</p>
+
+                    <p>
+                            <a class="btn btn-link" href="index.php?controller=Main&action=showProductos" >Ver productos </a></p>
+                        <div class="pt-15 more-ac">
+                        <a href="index.php" rel="nofollow" class="btn btn-light withBtnComprar">Volver al Home</a>
                     </div>
+                </section>
                 `; 
-                $('.add-addCart-body').html(producto);
-                $('.overlay').fadeIn();
-                var cat=JSON.parse(res);
-                var cant=0;
-                cat.map((c)=>cant=cant+ parseInt(c.cant));
-                $('.number').text(cant);
+                $('.cartItem').html(vacio);
+                $('.number').text('0');
             }
         });
+    })
+    /*Controles carro de compras*/
+    function cotrolesCarro(dato,e,control,valor){
+        var id = $(e).data(dato);
+        var id_cartilla=$(e).data('id_cartilla');
+        $.ajax({
+            type: "POST",
+            url: "index.php?controller=main&action=addCart",
+            data: {
+                'id':id,
+                'id_cartilla':id_cartilla,
+                'valor':valor,
+                'control': control
+            },
+            cache:false,
+            beforesend: function(){
+
+            },
+            error: function () {
+                alert("error petición ajax");
+            },
+            success: function (res) {
+                if(res==0){
+                    var vacio =`
+                    <section class="empty-cart">
+                        <i class="fa fa-shopping-cart fa-5x"></i>
+                        <p class="title bold-text">
+                            Carro de compras vacío.</p>
+
+                        <p>
+                                <a class="btn btn-link" href="index.php?controller=Main&action=showProductos" >Ver productos </a></p>
+                            <div class="pt-15 more-ac">
+                            <a href="index.php" rel="nofollow" class="btn btn-light withBtnComprar">Volver al Home</a>
+                        </div>
+                    </section>
+                    `; 
+                    $('.cartItem').html(vacio);
+                    $('.number').text('0');
+                }else{
+                    var cat=JSON.parse(res);
+                    var cant=0;
+                    var totalc=0;
+                    cat.map((c)=>{cant=cant+ parseInt(c.cant), totalc=totalc+parseFloat(c.total)});
+                    $('.number').text(cant);
+                    $('.totalCarrito').text(`$ ${totalc}`);
+                    $('.total').attr('value', totalc);
+                    var categorias=cat.map((c)=>`
+                        <div class="item-wrap">
+                                <div class="item-all">
+                                    <div class="item-info info">
+                                        <ul class="inline-block">
+                                            <li class="img-thumbnail"><img src="view/img/${c.img}" alt="" class="imgCart"></li>
+                                            
+                                        </ul>
+                                        <div class="nombreItem inline-block">${c.nombre}</div>
+                                    </div>
+                                    <div class="item-info qty">
+                                        
+                                        <input class="form-control input-qty" type="tel" value="${cant}" data-id="${c.id}" data-id_cartilla="${c.id_cartilla}">
+                                        <div class="btns-masmenos">
+                                            <div class="btn btn-default btn-up" data-id_mas="${c.id}" data-id_cartilla="${c.id_cartilla}"><i class="fa fa-plus"></i></div>
+                                            <div class="btn btn-default btn-down" data-id_menos="${c.id}" data-id_cartilla="${c.id_cartilla}"><i class="fa fa-minus"></i></div>
+                                        </div>
+                                        <div class="deleteItem">
+                                            <div class="btn btn-link btn-delete" data-id_delete="${c.id}" data-id_cartilla="${c.id_cartilla}">Eliminar</div>
+                                        </div>
+                                    </div>
+                                    <div class="item-info precio-unitario">
+                                        <p class="bold-text sizeText15">$ <span>${c.price} </span>c/u</p>
+                                    </div>
+                                    <div class="item-info precio-total">
+                                        <p class="bold-text sizeText15">$ <span>${c.total}</span></p>
+                                    </div>
+                                </div>
+                            </div>`);
+                    var cart=categorias.toString();
+                    var stringCart=cart.replace(",", " ");
+                    $('.wrap-body').html(stringCart);
+                }
+            }
+        });
+    }
+    $('.wrap-body').on('change','.input-qty',function(){
+        var valor =$(this).val();
+        cotrolesCarro('id',this,4, valor);
+    });
+    $('.wrap-body').on('click','.btn-up', function(){
+        cotrolesCarro('id_mas',this,3, 0);
+    });
+    $('.wrap-body').on('click','.btn-down', function(){
+        cotrolesCarro('id_menos',this,2, 0);
+    });
+    $('.wrap-body').on('click','.btn-delete', function(){
+        cotrolesCarro('id_delete',this,1, 0);
+    });
+    /* Añadir al carrode compra */
+    $('.addCart').on('click', function(){
+        var id = $(this).data('id');
+        var valor = $('.valorP').val();
+        var valorneto=$(this).data('valor');
+        var name = $(this).data('nombre');
+        var img = $(this).data('img');
+        var cantidad = $('.cantidad').val();
+        var id_user=$('.id_user').val();
+        var tipoUser=$(this).data('tipouser');
+        var id_cartilla=$('input:radio[name=id_cartilla]:checked').val();
+        var id_padre=$('input:radio[name=id_cartilla]:checked').data('id_padre');
+       
+        if($("input:radio[name=id_cartilla]").is(':checked')){  
+            $.ajax({
+                type: "POST",
+                url: "index.php?controller=main&action=addCart",
+                data: {
+                    'id':id,
+                    'valor':valor,
+                    'valorneto':valorneto,
+                    'nombre':name,
+                    'img':img,
+                    'cantidad':cantidad,
+                    'tipouser':tipoUser,
+                    'id_user':id_user,
+                    'id_cartilla':id_cartilla,
+                    'id_padre':id_padre
+                },
+                cache:false,
+                beforesend: function(){
+
+                },
+                error: function () {
+                    alert("error petición ajax");
+                },
+                success: function (res) {
+                    var cat=JSON.parse(res);
+                    var cant=0;
+                    cat.map((c)=>cant=cant+ parseInt(c.cant));
+                    $('.number').text(cant);
+                    var producto =`
+                        <div class="row">
+                            <div class="col-md-1"><i class="fa fa-2x fa-check-circle-o checkAgregado checkCircle-infIcon"></i></div>
+                            <div class="col-md-2">
+                                <img src="view/img/${img}" class="img-thumbnail" alt="">
+                            </div>
+                            <div class="col-md-5">
+                                <p class="title-prod"><a href="index.php?Controller=Main&action=comprar&id=${id}">${name}</a></p>
+                                <p class="cantidad-prod">Cantidad: ${cantidad}</p>
+                            </div>
+                            <div class="col-md-4">$ ${valor*cantidad}</div>
+                        </div>
+                    `; 
+                    $('.add-addCart-body').html(producto);
+                    $('.overlay').fadeIn();
+                }
+            });
+        }else{  
+            alert("Seleccione una membresía");  
+        } 
+        
     });
     /* final añadir al carro de compra */
     $('.tipo').on('change',function(){

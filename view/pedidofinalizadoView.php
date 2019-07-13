@@ -40,7 +40,7 @@
 
                                     </div>
 
-                                <div class="col-md-10">
+                                <div class="col-md-12">
 
                                     <div class="card-body ">
 
@@ -52,27 +52,27 @@
 
                                                 <div class="breadcrumb border-1">
 
-                                                    <strong>Fecha: </strong> <?php echo $pago['pago']->fecha_pago ?>
+                                                    <strong> </strong> <?php echo $pedido['pedido']->fecha ?>
 
                                                 </div>
 
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
 
                                                 <div class="breadcrumb border-1">
 
-                                                    <strong>Nombre:</strong> <?php echo $pago['user']->name ?>
+                                                    <strong></strong> <?php echo $pedido['user']->name ?>
 
                                                 </div>
 
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
 
                                                 <div class="breadcrumb border-1">
 
-                                                    <strong>Email: </strong> <?php echo $pago['user']->email ?>
+                                                    <strong></strong> <?php echo $pedido['user']->email ?>
 
                                                 </div>
 
@@ -82,7 +82,7 @@
 
                                                 <div class="breadcrumb border-1">
 
-                                                    <strong>Dirección: </strong> <?php echo $pago['user']->direccion ?>
+                                                    <strong> </strong> <?php echo $pedido['user']->direccion ?>
 
                                                 </div>
 
@@ -111,22 +111,30 @@
                                                         </thead>
 
                                                         <tbody>
-
+                                                            <?php
+                                                            
+                                                            foreach($pedido['lineas'] as $p){ ?>
                                                             <tr>
 
-                                                                <td><?php echo $pago['plan']->nombre_plan ?></td>
-                                                                <td><?php echo $pago['pago']->posicion ?></td>
-                                                                <td><?php echo $pago['pago']->valor/$pago['pago']->posicion ?></td>
-                                                                <td><?php echo $pago['pago']->valor ?></td>
+                                                                <td><?php echo $p->id_plan ?></td>
+                                                                <td><?php echo $p->cantidad ?></td>
+                                                                <td>$ <?php echo $p->precio ?></td>
+                                                                <td>$ <?php echo $p->total ?></td>
 
                                                             </tr>
-
+                                                            
+                                                            <?php } ?>
+                                                            <tr>
+                                                                <td colspan="2"></td>
+                                                                <td><strong>Total</strong></td>
+                                                                <td><strong>$ <?php echo $pedido['pedido']->valor ?></strong></td>
+                                                            </tr>
                                                         </tbody>
-
+                                                                
 
 
                                                     </table>
-
+                                                    
                                                 </div>
 
                                             </div>

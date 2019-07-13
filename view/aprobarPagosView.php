@@ -122,7 +122,7 @@
                                     include 'activarModal.php';
                                   }
                           break; 
-                          case 2: if($pago[$i]['pagos']->estado==0){echo '<a class="btn btn-primary btn-options" href="?controller=Cartillas&action=aprobarCompra&id='.$pago[$i]['pagos']->id_cartilla_paga.'&valor='.$pago[$i]['pagos']->valor.'&id_pago='.$pago[$i]['pagos']->id.'&fecha='.$pago[$i]['cartilla']->fecha_vencimiento.'" >Aprobar compra</a>';}
+                          case 2: if($pago[$i]['pagos']->estado==0){echo '<a class="btn btn-primary btn-options" href="?controller=Cartillas&action=aprobarCompra&id_pago='.$pago[$i]['pagos']->id.'" >Aprobar compra</a>';}
                           break; 
                           
                         }  ?>                        

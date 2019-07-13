@@ -80,23 +80,16 @@ class CartillasController extends ControladorBase{
     }
     public function aprobarCompra(){
         $cartilla=new Cartilla();
-        $pagos='';
         if(isset($_GET['id_pago'])){
             $id_pago=$_GET['id_pago'];
             $cartilla->updatePago($id_pago, 'pagos');
-            $pagos=$cartilla->getByIdTable($id_pago, 'pagos');
-            $comisiones=$cartilla->generarComisionesProducto($pagos[0]->valor,$pagos[0]->id_cartilla_paga, $pagos[0]->id_plan);
-            $pago=$cartilla->getPagoByid($id_pago);
-            $data = ['id_user' => $pago['pago']->id_user,
-                'id_cartilla' => $pago['pago']->id_cartilla_paga,
-                'id_prod' => $pago['pago']->id_plan,
-                'valor' => $pago['pago']->valor,
-                'cantidad' => $pago['cantidad'],
-                'fecha' => $pago['pago']->fecha_pago,
-                'metodo' => $pago['pago']->metodo_pago
-        ];
-
-            $cartilla->savePedido($data);
+            $pedido=$cartilla->getPedidoByIdpago($id_pago);
+            $lineas=$cartilla->getLineasByPedido($pedido->id);
+            print_r($lineas);
+            foreach($lineas as $l){
+                $comisiones=$cartilla->generarComisionesProducto($l->total,$l->id_cartilla, $l->id_plan);
+            }
+           
         }
 
         header("location:?controller=Respuestas&action=cambioEstadoExitoso");
@@ -263,7 +256,6 @@ class CartillasController extends ControladorBase{
             $plan->setValor_bono($valor_bono);
             $plan->setCant_users($cant_users);
             $result[]=$plan->update();
-            print_r($result);
             if($result[0]->error==""){
                 header("location:?controller=Respuestas&action=editExito");
             }else{
@@ -318,129 +310,68 @@ class CartillasController extends ControladorBase{
    
     public function pedido(){
         $cartilla=new Cartilla();
+        $carrito=Session::get('carrito');
         $cantidad=$_POST['cantidad'];
-        $valor=$_POST['valor']*$cantidad;
-        $id_plan=$_POST['id_plan'];
+        $total=$_POST['total'];
         $metodo_pago=$_POST['metodo'];
         $documento=$_POST['documento'];
-        if(isset($_POST['id_user'])){
-            $id_user=$_POST['id_user'];
-            $fecha=date('Y')."-".date('m')."-".date('d');
-            if(isset($_POST['usuarioRegular'])){
-                $data=[
-                    'id_car_padre'=>'',
-                    'id_cartilla_paga'=>'',
-                    'id_plan'=>$id_plan,
-                    'valor'=>$valor,
-                    'metodo'=>$metodo_pago,
-                    'id_user'=>$id_user,
-                    'documento'=>$documento,
-                    'referido'=>'',
-                    'posicion'=>'',
-                    'inscripcion'=>$fecha,
-                    'cantidad'=>$cantidad
-                ];
-                $pedidoData=[
-                    'id_cartilla'=>'',
-                    'id_user'=>$id_user,
-                    'id_prod'=>$id_plan,
-                    'fecha'=>$fecha,
-                    'cantidad'=>$cantidad,
-                    'valor'=>$valor,
-                    'metodo'=>$metodo
-                ];
-                $p=$cartilla->savePago($data, 3);
-                $pe=$cartilla->savePedido($pedidoData);
-                $plan=$cartilla->getByIdTable($id_plan, 'planes');
-                $pago=$cartilla->getUltimoRegistro('pagos');
-                require_once 'config/headers.php';
-                require_once 'config/cuerposMails.php';
-                $datos= array(
-                    "destinatario"=>"$email",
-                    "asunto"=>"Credenciales registro de usuario Mastercash",
-                    "cuerpo"=>"$cRegistro",
-                    "headers"=>"$headers"
-                );
-                $envio=$cartilla->envioMail($datos);
-            }else{
-                $id_cartilla=$_POST['id_cartilla'];
-                $id_cartilla_padre=$_POST['id_padre'];
-                $data=['id_car_padre'=>$id_cartilla_padre,
-                    'id_cartilla_paga'=>$id_cartilla,
-                    'id_plan'=>$id_plan,
-                    'valor'=>$valor,
-                    'metodo'=>$metodo_pago,
-                    'id_user'=>$id_user,
-                    'documento'=>$documento,
-                    'referido'=>'',
-                    'posicion'=>'',
-                    'inscripcion'=>$fecha,
-                    'cantidad'=>$cantidad
-                ];
-                $p=$cartilla->savePago($data, 2);
-            }
-            
-        }else{
-            $user=$_POST['usuario'];
-            $nombre=$_POST['nombre'];
-            $email=$_POST['email'];
-            $tipoDocumento=$_POST['tipoDocumento'];
-            $cc=$_POST['cc'];
-            $nacimiento=$_POST['nacimiento'];
-            $telefono=$_POST['telefono'];
-            $celular=$_POST['celular'];
-            $direccion=$_POST['direccion'];
-            $ciudad=$_POST['ciudad'];
-            $provincia=$_POST['provincia'];
-            $pais=$_POST['pais'];
-            $rol=$_POST['rol'];
-
-            $fechaactual= getdate();
-            $pass=$cartilla->gPass();
-            $fechain= ($fechaactual['mday']."/".$fechaactual['month']."/".$fechaactual['year']);
-            $result=$cartilla->saveUser($user, $nombre, $pass['passmd5'], $email, $tipoDocumento, $cc, $fechain, $rol);
-            $userUl = $cartilla->getUltimoRegistro('users');
-            $id_user = $userUl->id;
-            $fecha=date('Y')."-".date('m')."-".date('d');
-            $data=[
-                'id_car_padre'=>'',
-                'id_cartilla_paga'=>'',
-                'id_plan'=>$id_plan,
-                'valor'=>$valor,
-                'metodo'=>$metodo_pago,
-                'id_user'=>$id_user,
-                'documento'=>$documento,
-                'referido'=>'',
-                'posicion'=>'',
-                'inscripcion'=>$fecha,
-                'cantidad'=>$cantidad
-            ];
-            $pedidoData=[
-                'id_cartilla'=>'',
-                'id_user'=>$id_user,
-                'id_prod'=>$id_plan,
-                'fecha'=>$fecha,
-                'cantidad'=>$cantidad,
-                'valor'=>$valor,
-                'metodo'=>$metodo
-            ];
-            $pe=$cartilla->savePedido($pedidoData);
+        $id_user=$_POST['id_user'];
+        $user=$cartilla->getByIdTable($id_user, 'users');
+        $email=$user->mail;
+        $tipoUser=$_POST['tipoUser'];
+        $fecha=date('Y')."-".date('m')."-".date('d');
+        $data=[
+            'id_car_padre'=>'',
+            'id_cartilla_paga'=>'',
+            'valor'=>$total,
+            'metodo'=>$metodo_pago,
+            'id_user'=>$id_user,
+            'documento'=>$documento,
+            'referido'=>'',
+            'posicion'=>'',
+            'inscripcion'=>$fecha,
+        ];
+        if($tipoUser==0){
             $p=$cartilla->savePago($data, 3);
-            $password=$pass['pass'];
-            $plan=$cartilla->getByIdTable($id_plan, 'planes');
-            $pago=$cartilla->getUltimoRegistro('pagos');
-            require_once 'config/headers.php';
-            require_once 'config/cuerposMails.php';
-            $datos= array(
-                "destinatario"=>"$email",
-                "asunto"=>"Credenciales registro de usuario Mastercash",
-                "cuerpo"=>"$cRegistro",
-                "headers"=>"$headers"
-            );
-            $envio=$cartilla->envioMail($datos);
-            
+        }else{
+            $p=$cartilla->savePago($data, 2);
+        }
+        $pago=$cartilla->getUltimoRegistro('pagos');
+        $pedidoData=[
+            'id_cartilla'=>'',
+            'id_user'=>$id_user,
+            'id_prod'=>'',
+            'id_pago'=>$pago->id,
+            'fecha'=>$fecha,
+            'cantidad'=>$cantidad,
+            'total'=>$total,
+            'metodo'=>$metodo_pago
+        ];
+        $pe=$cartilla->savePedido($pedidoData);
+        $pedido=$cartilla->getUltimoRegistro('pedidos');
+        foreach($carrito as $c){
+            $lineaPedidoData=[
+                'pedido'=>$pedido->id,
+                'id_cartilla'=>$c['id_cartilla'],
+                'id_prod'=>$c['id'],
+                'cantidad'=>$c['cant'],
+                'precio'=>$c['price'],
+                'total'=>$c['total']
+            ];
+            $cartilla->saveLineasPedido($lineaPedidoData);
         }
         
+        
+        require_once 'config/headers.php';
+        require_once 'config/cuerpoMailCompra.php';
+        $datos= array(
+            "destinatario"=>$email.",registrowt@gmail.com",
+            "asunto"=>"Compra en línea mastercash",
+            "cuerpo"=>$compraOnline,
+            "headers"=>$headers
+        );
+        $envio=$cartilla->envioMail($datos);
+        Session::destroy('carrito');
         header("location:?controller=Respuestas&action=compraProducto");
     }
     public function cambioEstado(){
