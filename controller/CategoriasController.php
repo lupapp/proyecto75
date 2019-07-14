@@ -68,16 +68,16 @@ class CategoriasController extends ControladorBase{
     }
     
     public function update(){
-        if($_POST['plan']){
+        if($_POST['nombre']){
             $id=$_POST['id'];
             $nombre=$_POST['nombre'];
             $posicion=$_POST['posicion'];
             
             $categoria = new Categoria();
 
-            $plan->setId($id);
-            $plan->setNombre($nombre);
-            $plan->setPosicion($posicion);
+            $categoria->setId($id);
+            $categoria->setNombre($nombre);
+            $categoria->setPosicion($posicion);
             
             $result[]=$categoria->update();
             

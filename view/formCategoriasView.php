@@ -22,7 +22,7 @@
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-            <i class="fa fa-user-plus"></i> Registro de nueva categoría</div>
+            <i class="fa fa-tags"></i> Registro de nueva categoría</div>
         <div class="card-body">
             <form id="loginForm" action="?controller=Categorias&action=crear" method="POST"  class="form-horizontal" >
                 <div class="form-row">
