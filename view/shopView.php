@@ -107,7 +107,7 @@
 
                                             $descuento=($prod->descuento/100)*$prod->valor_plan;
 
-                                            $valor=number_format($prod->valor_plan-$descuento);
+                                            $valor=number_format($prod->valor_plan-$descuento,2,'.', '');
 
                                             echo '<span class="block2-price m-text20 p-r-5 valorPro">
 
@@ -119,7 +119,7 @@
 
                                             echo '<span class="block2-price m-text20 p-r-5 valorPro">
 
-                                                $'.number_format($prod->valor_plan).'
+                                                $'.number_format($prod->valor_plan,2,'.', '').'
 
                                             </span>';
 
@@ -128,7 +128,7 @@
                                     }else{
                                         echo '<span class="block2-price m-text20 p-r-5 valorPro">
 
-                                            $'.number_format($prod->valor_plan).'
+                                            $'.number_format($prod->valor_plan,2,'.', '').'
 
                                         </span>';
                                     }
@@ -139,7 +139,7 @@
 
                                     echo '<span class="block2-price m-text20 p-r-5 valorPro">
 
-                                        $'.number_format($prod->valor_plan).'
+                                        $'.number_format($prod->valor_plan,2,'.', '').'
 
                                     </span>
 

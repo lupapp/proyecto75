@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,17 +44,12 @@
                                 <input class="form-control" id="exampleInputValor" type="text" name="descuento" aria-describedby="valor_plan" placeholder="Descuento en porcentaje">
                              </div>
                         </div>
-                        <?php if($_GET['tipo']==1){ ?>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="exampleInputValor">*Cantidad de hijos</label>
-                                    <input class="form-control" id="exampleInputValor" type="text" name="cant_hijos" aria-describedby="cant_hijos" placeholder="Numero de hijos">
-                                </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="exampleInputValor">*Cantidad de hijos</label>
+                                <input class="form-control" id="exampleInputValor" type="text" name="cant_hijos" aria-describedby="cant_hijos" placeholder="Numero de hijos">
                             </div>
-                        <?php }else{ ?>
-                            <input class="form-control" id="exampleInputValor" type="hidden" name="cant_hijos" aria-describedby="cant_hijos" value='0'>
-                        <?php } ?>
-                        
+                        </div>
                         
                     </div>
                       <div class="form-row">
@@ -67,60 +61,47 @@
                             </div>
                         </div>
                         <?php }?>
-                        
-                                <input class="form-control" id="exampleInputValorBono" type="hidden" name="valor_bono" aria-describedby="valor_bono" placeholder="% bono">
-                          
-                       
-                                <input class="form-control" id="exampleInputValorBono" type="hidden" name="fondo" aria-describedby="fondo" placeholder="% fondo inversión">
-                          
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="exampleInputValorBono">Porcentaje bono</label>
+                                <input class="form-control" id="exampleInputValorBono" type="text" name="valor_bono" aria-describedby="valor_bono" placeholder="% bono">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="exampleInputValorBono">Porcentaje fondo</label>
+                                <input class="form-control" id="exampleInputValorBono" type="text" name="fondo" aria-describedby="fondo" placeholder="% fondo inversión">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-row">
-                        <?php if($_GET['tipo']==1){ ?>
                         <div class="col-md-3">
                              <div class="form-group">
                                 <label for="exampleInputVencimiento">Duración en días del periodo</label>
                                 <input class="form-control" id="exampleInputVencimiento" type="text" name="dias" aria-describedby="dias" placeholder="Escriva la cantidad de días que dura la membresía">
                             </div>
                         </div>
-                        <?php }else{ ?>
-                            <input class="form-control" id="exampleInputVencimiento" type="hidden" name="dias" aria-describedby="dias" value="0">
-                        <?php } ?>
-                        <?php if($_GET['tipo']==1){ ?>
-                            <input class="form-control" type="hidden" name="estado" value="Activo">
-                        <?php }else{ ?>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="exampleInputEstado">*Estado</label>
-                                    <select class="form-control" name="estado" id="exampleInputEstado">
-                                        <option value="Activo">Existencia</option>
-                                        <option value="0">Agotado</option>
-                                    </select>
-                                </div>
-                            </div>
-                        <?php } ?>
-                        
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="exampleInputEstado">*Tipo</label>
-                                <select class="form-control tipo"   name="tipo" id="exampleInputEstado">
-                                    <?php if($_GET['tipo']==1){ ?>
-                                        <option value="1">Membresía</option>
-                                    <?php }else{ ?> 
-                                        <option value="0">Producto</option>
-                                    <?php } ?>
+                                <label for="exampleInputEstado">*Estado</label>
+                                <select class="form-control" name="estado" id="exampleInputEstado">
+                                    <option>Activo</option>
+                                     <option>Inactivo</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <?php if($_GET['tipo']==1){ ?>
-                                    
-                                <?php }else{ ?> 
-                                    <label for="exampleInputEstado">*Categoria</label>
-                                    <select class="form-control categorias"   name="categoria" id="exampleInputEstado">
-                                        <script>llenarCategorias();</script>
-                                    </select>    
-                                <?php } ?>
+                                <label for="exampleInputEstado">*Tipo</label>
+                                <select class="form-control tipo"   name="tipo" id="exampleInputEstado">
+                                    <option value="1">Membresía</option>
+                                    <option value="0"> Producto</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group categorias">
+                                
                             </div>
                         </div>
                     </div>

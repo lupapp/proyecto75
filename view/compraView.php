@@ -31,7 +31,7 @@
                                     </h4>
 
                                     <div class="block2-price  m-text20">
-                                        $<span class="valorProducto"><?php echo number_format($producto[0]->valor_plan) ?></span>
+                                        $<span class="valorProducto"><?php echo number_format($producto[0]->valor_plan,2,'.', '') ?></span>
                                     </div>
                                 </div>
                                 <div class="col-md-7 pl-5">
@@ -124,8 +124,8 @@
                                                         $valor=$producto[0]->valor_plan-$descuento;
                                                         echo '<script>
                                                         $(document).ready(function(){
-                                                            $(".valorProducto").text('.number_format($valor).');
-                                                            $(".valorP").val('.number_format($valor).');
+                                                            $(".valorProducto").text('.number_format($valor,2,'.', '').');
+                                                            $(".valorP").val('.number_format($valor,2,'.', '').');
                                                         });
                                                         </script>'; ?>
                                                         <button type="submit" class="col-md-10 mx-auto w-75 col-10">

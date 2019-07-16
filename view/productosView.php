@@ -22,7 +22,7 @@
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-users"></i> Lista de Membresías
-          <a class="btn btn-success float-right" href="?controller=Planes&action=create&tipo=1">Nueva membresía</a></div>
+          <a class="btn btn-success float-right" href="?controller=Planes&action=create">Nueva membresía</a></div>
         <div class="card-body">
           <div class="table-responsive">
               <?php if ($allplanes!=''){ ?>
@@ -71,7 +71,7 @@
                     <td><?php echo $planes->valor_bono?></td>
                     <td><?php echo $planes->porcentaje_fondo?></td>
                     <td>
-                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar plan" href="?controller=Planes&action=show&id=<?php echo $planes->id?>&tipo=1"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar plan" href="?controller=Planes&action=show&id=<?php echo $planes->id?>"><i class="fa fa-pencil"></i></a>
                     </td>
                 </tr>
                       
@@ -88,7 +88,7 @@
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fa fa-users"></i> Lista de Productos
-                <a class="btn btn-success float-right" href="?controller=Planes&action=create&tipo=0">Nuevo Producto</a></div>
+                <a class="btn btn-success float-right" href="?controller=Planes&action=create">Nuevo Producto</a></div>
             <div class="card-body">
                 <div class="table-responsive">
                     <?php if ($productos!=''){ ?>
@@ -126,7 +126,7 @@
                                   Nivel 5: <?php echo $pro->porcentaje5?>%<br/>
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar plan" href="?controller=Planes&action=show&id=<?php echo $pro->id?>&tipo=0"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-warning btn-options" data-toggle="tooltip" title="Editar plan" href="?controller=Planes&action=show&id=<?php echo $pro->id?>"><i class="fa fa-pencil"></i></a>
                                 </td>
                             </tr>
 

@@ -294,7 +294,7 @@ if(isset($_SESSION['carrito'])){
                     <a class='quitar icon-cancel' data-id_prod='".$datos[$i]['id']."' data-det='".$detalle."'></a>
                 </div>
                 <div class='price'>
-                        ".number_format($datos[$i]['price']*$datos[$i]['cant'],2)."
+                        ".number_format($datos[$i]['price']*$datos[$i]['cant'],2,'.', '')."
                 </div>
 
         </div>";
@@ -304,7 +304,7 @@ if(isset($_SESSION['carrito'])){
     echo"<center>No hay productos</center>";
     unset($_SESSION['total']);
 }
-$_SESSION['suma']=number_format($suma,2);
+$_SESSION['suma']=number_format($suma,2,'.', '');
 $_SESSION['cantidad']=$cantidad;
-$_SESSION['total']=number_format($_SESSION['suma']+$_SESSION['delivery']['v'],2);
+$_SESSION['total']=number_format($_SESSION['suma']+$_SESSION['delivery']['v'],2,'.', '');
 ?>
