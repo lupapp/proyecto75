@@ -256,7 +256,11 @@ class MainController extends ControladorBase{
         
         $this->view("shop", array('productos' => $productos,'categorias'=>$categorias));
     }
-
+    public function showCategorias(){
+        $plan = new Plan;
+        $categorias=$plan->getAllCategoriasByTable('categorias');
+        $this->view("items", array('categorias'=>$categorias));
+    }
     public function createUserLink(){
 
         if(isset($_GET['id'])){

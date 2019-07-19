@@ -281,7 +281,7 @@ class Plan extends EntidadBase{
 
     public function save(){
 
-        $query="INSERT INTO planes (id, nombre_plan, categoria valor_plan, descuento, cant_hijos, porcentaje1, porcentaje2, porcentaje3, porcentaje4, porcentaje5, porcentaje_fondo, dias_vencimiento, estado, tipo, avatar_plan, avatar_user, valor_bono, cant_users) "
+        $query="INSERT INTO planes (id, nombre_plan, categoria, valor_plan, descuento, cant_hijos, porcentaje1, porcentaje2, porcentaje3, porcentaje4, porcentaje5, porcentaje_fondo, dias_vencimiento, estado, tipo, avatar_plan, avatar_user, valor_bono, cant_users) "
 
                 ."VALUES (NULL, '".$this->nombre_plan."','".$this->categoria."', '".$this->valor_plan."', '".$this->descuento."', '".$this->cant_hijos."', '".$this->porcentaje1."', '".$this->porcentaje2."' , '".$this->porcentaje3."', '".$this->porcentaje4."', '".$this->porcentaje5."',  '".$this->porcentaje_fondo."', '".$this->dias_vencimiento."',"
 

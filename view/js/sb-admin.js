@@ -198,7 +198,7 @@
                         Carro de compras vacío.</p>
 
                     <p>
-                            <a class="btn btn-link" href="index.php?controller=Main&action=showProductos" >Ver productos </a></p>
+                            <a class="btn btn-link" href="index.php?controller=Main&action=showCategorias" >Ver productos </a></p>
                         <div class="pt-15 more-ac">
                         <a href="index.php" rel="nofollow" class="btn btn-light withBtnComprar">Volver al Home</a>
                     </div>
@@ -238,7 +238,7 @@
                             Carro de compras vacío.</p>
 
                         <p>
-                                <a class="btn btn-link" href="index.php?controller=Main&action=showProductos" >Ver productos </a></p>
+                                <a class="btn btn-link" href="index.php?controller=Main&action=showCategorias" >Ver productos </a></p>
                             <div class="pt-15 more-ac">
                             <a href="index.php" rel="nofollow" class="btn btn-light withBtnComprar">Volver al Home</a>
                         </div>

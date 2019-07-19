@@ -47,7 +47,7 @@
                 <?php 
                 foreach ($categorias as $categoria){ ?>
                 <tr>
-                   
+                    <td class="w-10"><img class="img-thumbnail" src="view/img/<?php echo $categoria->img?>"></td>
                     <td><?php echo $categoria->nombre?></td>
                     <td><?php echo $categoria->posicion?></td>
                     

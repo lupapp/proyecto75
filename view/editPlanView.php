@@ -183,11 +183,13 @@
                     </div>
                 </div>
                  <div class="form-row">
+                 <?php if($_GET['tipo']==1){ ?>
                     <div class="col-md-1">
                         <div class="form-group">
                             <img src="view/img/<?php echo $plan->avatar_user ?>" class="img-thumbnail" >
                         </div>
                     </div>
+                   
                     <div class="col-md-5">
                         <div class="form-group">
                           
@@ -200,6 +202,9 @@
                             <input class="form-control" id="exampleInputEmail1" type="file" name="avatar_user" aria-describedby="file">
                         </div>
                     </div>
+                    <?php }else{ ?>
+                        
+                    <?php } ?>
                 </div>
                 <button type="submit" class="btn btn-success float-right cursor-pointer" >Guardar</button>
                 

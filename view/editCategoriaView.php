@@ -24,7 +24,7 @@
         <div class="card-header">
             <i class="fa fa-tags"></i> Edición nueva categoría</div>
         <div class="card-body">
-        <form id="loginForm" action="?controller=Categorias&action=update" method="POST"  class="form-horizontal" >
+        <form id="loginForm" action="?controller=Categorias&action=update" method="POST"  class="form-horizontal" enctype="multipart/form-data" >
                 <div class="form-row">
                     <div class="col-md-6">
                             <input type="hidden" name="id" value="<?php echo  $categoria->id ?>">
@@ -43,6 +43,23 @@
                     </div>
                     
                 </div>
+                <div class="col-md-1">
+                        <div class="form-group">
+                            <img src="view/img/<?php echo $categoria->img ?>" class="img-thumbnail" >
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                          
+                            <label><strong>Imagen actual:</strong> <?php echo $categoria->img ?></label>
+                            <input type="hidden" name="nameimg" value="<?php echo $categoria->img ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input class="form-control" id="exampleInputEmail1" type="file" name="img" aria-describedby="file">
+                        </div>
+                    </div>
                 <button type="submit" class="btn btn-primary float-right cursor-pointer" >Guardar</button>
                 <a href="javascript:history.back(1)" class="btn btn-success float-right cursor-pointer mr-2" >Regresar</a>
             </form>

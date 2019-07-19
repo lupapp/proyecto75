@@ -1762,10 +1762,13 @@ class EntidadBase{
                 $destino = 'view/img' ; // Carpeta donde se guardata 
 
                 $sep=explode('image/',$file["type"]); // Separamos image/ 
+                if(count($sep)>1){
+                    $tipo=$sep[1]; // Optenemos el tipo de imagen que es
+                }else{
+                    return;
+                }
+                
 
-                $tipo=$sep[1]; // Optenemos el tipo de imagen que es
-
-                echo $tipo;
 
                 if($tipo == "jpeg" || $tipo == "jpg" || $tipo == "png"){ // Si el tipo de imagen a subir es el mismo de los permitidos, segimos. Puedes agregar mas tipos de imagen
 
@@ -1773,7 +1776,7 @@ class EntidadBase{
 
                 }else{
 
-                    header("location:?controller=Respuestas&action=tipoFile");
+                   header("location:?controller=Respuestas&action=tipoFile");
 
                 }// Si no es el tipo permitido lo desimos }
 

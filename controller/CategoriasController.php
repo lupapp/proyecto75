@@ -42,11 +42,13 @@ class CategoriasController extends ControladorBase{
         if(isset($_POST['nombre'])){
             $nombre=$_POST['nombre'];
             $posicion=$_POST['posicion'];
+            $img=$_FILES [ 'img' ];
             
             $categoria= new Categoria();
-            
+            $plan->uploaded($img);
             $categoria->setNombre($nombre);
             $categoria->setPosicion($posicion);
+            $categoria->setImg($img['name']);
             $result=$categoria->save();
             if($result->error==""){
                 header("location:?controller=Respuestas&action=registroExito");
@@ -72,9 +74,14 @@ class CategoriasController extends ControladorBase{
             $id=$_POST['id'];
             $nombre=$_POST['nombre'];
             $posicion=$_POST['posicion'];
-            
+            $img=$_FILES ['img'];
             $categoria = new Categoria();
-
+            if($img['name']==''){
+                $categoria->setImg($_POST['nameimg']);
+            }else{
+                $categoria->uploaded($img);
+                $categoria->setImg($img['name']);
+            }
             $categoria->setId($id);
             $categoria->setNombre($nombre);
             $categoria->setPosicion($posicion);

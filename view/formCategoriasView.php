@@ -24,7 +24,7 @@
         <div class="card-header">
             <i class="fa fa-tags"></i> Registro de nueva categoría</div>
         <div class="card-body">
-            <form id="loginForm" action="?controller=Categorias&action=crear" method="POST"  class="form-horizontal" >
+            <form id="loginForm" action="?controller=Categorias&action=crear" method="POST"  class="form-horizontal" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="col-md-6">
                             <div class="form-group">
@@ -41,6 +41,14 @@
                             </div>
                     </div>
                     
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">*Imagen</label>
+                        <input class="form-control" id="exampleInputEmail1" type="file" name="img" 
+                        aria-describedby="file" 
+                        placeholder="Imagen">
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary float-right cursor-pointer" >Registrar</button>
                 <a href="javascript:history.back(1)" class="btn btn-success float-right cursor-pointer mr-2" >Regresar</a>

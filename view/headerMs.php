@@ -36,7 +36,7 @@
               <?php include "cart.php" ?>
         <li>
         <li class="nav-item pro">
-          <a class="nav-link" data-target="#exampleModal" href="index.php?controller=Main&action=showProductos">
+          <a class="nav-link" data-target="#exampleModal" href="index.php?controller=Main&action=showCategorias">
                     <i class="fa fa-fw fa-arrow-down"></i>Productos
           </a>
           <ul class="nav-shop">

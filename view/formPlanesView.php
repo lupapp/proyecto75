@@ -68,10 +68,10 @@
                         </div>
                         <?php }?>
                         
-                                <input class="form-control" id="exampleInputValorBono" type="hidden" name="valor_bono" aria-describedby="valor_bono" placeholder="% bono">
+                                <input class="form-control" id="exampleInputValorBono" type="hidden" name="valor_bono" aria-describedby="valor_bono" placeholder="% bono" value="0">
                           
                        
-                                <input class="form-control" id="exampleInputValorBono" type="hidden" name="fondo" aria-describedby="fondo" placeholder="% fondo inversión">
+                                <input class="form-control" id="exampleInputValorBono" type="hidden" name="fondo" aria-describedby="fondo" placeholder="% fondo inversión" value="0">
                           
                     </div>
                     <div class="form-row">
@@ -133,14 +133,18 @@
                                 placeholder="Documento de identidad">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">*Avatar Usuario</label>
-                                <input class="form-control" id="exampleInputEmail1" type="file" name="avatar_user" 
-                                aria-describedby="file" 
-                                placeholder="Documento de identidad">
+                        <?php if($_GET['tipo']==1){ ?>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">*Avatar Usuario</label>
+                                    <input class="form-control" id="exampleInputEmail1" type="file" name="avatar_user" 
+                                    aria-describedby="file" 
+                                    placeholder="Documento de identidad">
+                                </div>
                             </div>
-                        </div>
+                        <?php }else{ ?> 
+                           
+                        <?php } ?>
                     </div>
                     <div class="form-row">
 

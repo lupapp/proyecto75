@@ -106,7 +106,7 @@
                         </table>
                         <div class="btnFinalCompra">
                             <button type="submit" class="btn btn-success w-100">Comprar</button>
-                            <a href="index.php?controller=Main&action=showProductos" class="btn btn-light w-100">Ver mas productos</a>
+                            <a href="index.php?controller=Main&action=showCategorias" class="btn btn-light w-100">Ver mas productos</a>
                         </div>
                         
                 
@@ -119,7 +119,7 @@
                             Carro de compras vacío.</p>
         
                         <p>
-                                   <a class="btn btn-link" href="index.php?controller=Main&action=showProductos" >Ver productos </a></p>
+                                   <a class="btn btn-link" href="index.php?controller=Main&action=showCategorias" >Ver productos </a></p>
                             <div class="pt-15 more-ac">
                             <a href="index.php" rel="nofollow" class="btn btn-light withBtnComprar">Volver al Home</a>
                         </div>

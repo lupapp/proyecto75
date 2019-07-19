@@ -51,7 +51,7 @@ $constantes=new Constantes();
             </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-              <a class="nav-link" href="?controller=Main&action=showProductos">
+              <a class="nav-link" href="?controller=Main&action=showCategorias ">
                   <i class="fa fa-fw fa-shopping-cart text-primary"></i>
                   <span class="nav-link-text">Tienda</span>
               </a>
