@@ -71,11 +71,8 @@ class Categoria extends EntidadBase{
     public function getCategorias(){
             $resultSet=[];
             $query=$this->db()->query("SELECT * FROM categorias ORDER BY posicion DESC");
-
             while($row=$query->fetch_object()){
-
-                    $resultSet[]=$row;
-
+                $resultSet[]=$row;
             }
             return $resultSet;
 
@@ -95,7 +92,7 @@ class Categoria extends EntidadBase{
 
     public function update(){
 
-        $query="UPDATE categorias SET nombre='".$this->nombre."', posicion='".$this->posicion."', img='".$this->img."' WHERE id=".$this->id."";
+        $query="UPDATE categorias SET nombre='".$this->nombre."', posicion='".$this->posicion."', img='".$this->img."' WHERE id='".$this->id."'";
 
         $update=$this->db()->query($query);
 

@@ -36,6 +36,7 @@
                                     <th>Cantidad</th>
                                     <th>Valor</th>
                                     <th>Metodo de pago</th>
+                                    <th>Ver pedido</th>
                                     <th>Cambio de estado</th>
                                 </tr>
                                 </thead>
@@ -49,7 +50,9 @@
                                     <th>Cantidad</th>
                                     <th>Valor</th>
                                     <th>Metodo de pago</th>
+                                    <th>Ver pedido</th>
                                     <th>Cambio de estado <?php echo count($pedidos[0]['cartilla']); ?></th>
+                                    
                                 </tr>
                                 </tfoot>
                                 <tbody class="tbodySol">
@@ -65,6 +68,8 @@
                                         <td><?php echo $pedidos[$i]['pedido']->cantidad?></td>
                                         <td>$ <?php echo $pedidos[$i]['pedido']->valor?></td>
                                         <td><?php echo $pedidos[$i]['pedido']->metodo?></td>
+                                        <td><a clas="btn btn-info" href="?controller=Pedidos&action=show&id=<?php echo $pedidos[$i]['pedido']->id ?>">Ver pedido</a>
+                                            </td>
                                         <td><?php if($pedidos[$i]['pedido']->estado==0){ ?>
                                             <form action="?controller=Pedidos&action=cambioEstado" method="post">
                                                 <input type="hidden" name="id" value="<?php echo $pedidos[$i]['pedido']->id?>">
@@ -79,6 +84,7 @@
                                                 </form>
                                             <?php }?>
                                             </td>
+                                            
                                     </tr>
 
                                 <?php } ?>

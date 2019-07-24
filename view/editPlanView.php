@@ -91,14 +91,13 @@
                     </div>
                     
                             <input value="<?php echo $plan->valor_bono ?>" class="form-control" id="exampleInputValorBono" type="hidden" name="valor_bono" aria-describedby="valor_bono" placeholder="% bono membresía">
-                     
                    
                             <input value="<?php echo $plan->porcentaje_fondo ?>" class="form-control" id="exampleInputValorBono" type="hidden" name="fondo" aria-describedby="fondo" placeholder="% fondo inversión">
                        
                 </div>
                 <div class="form-row">
                     <?php if($_GET['tipo']==1){ ?>
-                        <input class="form-control" type="hidden" name="estado" value="Activo">
+                        <input class="form-control" type="hidden" name="estado" value="Agotado">
                     <?php }else{ 
                         $estado='';
                         switch($plan->estado){

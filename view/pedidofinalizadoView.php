@@ -100,7 +100,7 @@
 
                                                             <th>Producto</th>
 
-                                                            <th>Calidad</th>
+                                                            <th>Cantidad</th>
 
                                                             <th>Valor unitario</th>
 

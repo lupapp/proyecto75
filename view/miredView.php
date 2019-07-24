@@ -60,44 +60,51 @@
 
 
                         <li class="text-uppercase font-weight-bold"><h2><?php echo $cartillas[$i]['plan']->nombre_plan ?>   ID: <?php echo $cartillas[$i]['cartilla']->id ?></h2>
-                                  <?php
-                                        if($cartillas[$i]['vigencia']==1){
-                                            $color='primary';?>
-                                            <a class="btn btn-<?php echo $color?> p-1 ml-1 font-weight-bold" tabindex="0"  role="button" data-toggle="popover" data-trigger="hover" title="Solicitud de pago" data-content="Dando click aqui puede ver el historial de comisiones y solicitar el pago de las comisiones disponibles" href="?controller=Comisiones&action&id=<?php echo $cartillas[$i]['cartilla']->id?>" ><i class="fa fa-money"></i></a>
-                             <?php 
-                                    }else{
-                                        $color='danger';?>
-                                        <a class="btn btn-<?php echo $color?> p-1 ml-1 font-weight-bold" tabindex="0"  role="button" data-toggle="popover" data-trigger="hover" title="Solicitud de pago bloqueada" data-content="Dando click aqui puede ver el historial de comisiones, pero no puede solicitar pago.  Esto es debido a que su membresía esta vencida, pongase en contacto con el administrador o realice el pago para activar su membresía" href="?controller=Comisiones&action&id=<?php echo $cartillas[$i]['cartilla']->id?>" ><i class="fa fa-money"></i></a>
-                                    <?php }
+                                  <?php 
+                                        if($cartillas[$i]['cartilla']->id_user==Session::get('id')){
+                                            if($cartillas[$i]['vigencia']==1){
+                                                $color='primary';?>
+                                                <a class="btn btn-<?php echo $color?> p-1 ml-1 font-weight-bold" tabindex="0"  role="button" data-toggle="popover" data-trigger="hover" title="Solicitud de pago" data-content="Dando click aqui puede ver el historial de comisiones y solicitar el pago de las comisiones disponibles" href="?controller=Comisiones&action&id=<?php echo $cartillas[$i]['cartilla']->id?>" ><i class="fa fa-money"></i></a>
+                                <?php 
+                                            }else{
+                                                $color='danger';?>
+                                                <a class="btn btn-<?php echo $color?> p-1 ml-1 font-weight-bold" tabindex="0"  role="button" data-toggle="popover" data-trigger="hover" title="Solicitud de pago bloqueada" data-content="Dando click aqui puede ver el historial de comisiones, pero no puede solicitar pago.  Esto es debido a que su membresía esta vencida, pongase en contacto con el administrador o realice el pago para activar su membresía" href="?controller=Comisiones&action&id=<?php echo $cartillas[$i]['cartilla']->id?>" ><i class="fa fa-money"></i></a>
+                                            <?php }
+                                    }
                                ?>
                               </li>
 
                               <li >Valor membresía: $ <?php echo $cartillas[$i]['plan']->valor_plan ?>  </li>
+                              
                               <?php
                               $color='';
                               $vigencia=$cartillas[$i]['vigencia'];
-                              if($vigencia==1){
-                                  $color='success'; ?>
-                                  <li><span class="text-success">Fecha de vencimiento: <?php echo $cartillas[$i]['cartilla']->fecha_vencimiento ?></span>  </li>
+                              if($cartillas[$i]['cartilla']->id_user==Session::get('id')){
+                                if($vigencia==1){
+                                    $color='success'; ?>
+                                    <li><span class="text-success">Fecha de vencimiento: <?php echo $cartillas[$i]['cartilla']->fecha_vencimiento ?></span>  </li>
 
-                              <?php }else{
-                                  $color='danger'; ?>
-                                  <li><span class="text-danger">Fecha de vencimiento: <?php echo $cartillas[$i]['cartilla']->fecha_vencimiento ?></span>
-                                      <a href="?controller=Cartillas&action=showRenovar&id=<?php echo $cartillas[$i]['cartilla']->id  ?> class="btn btn-danger">Renovar</a>  </li>
+                                <?php }else{
+                                    $color='danger'; ?>
+                                    <li><span class="text-danger">Fecha de vencimiento: <?php echo $cartillas[$i]['cartilla']->fecha_vencimiento ?></span>
+                                        <a href="?controller=Cartillas&action=showRenovar&id=<?php echo $cartillas[$i]['cartilla']->id  ?> class="btn btn-danger">Renovar</a>  </li>
+                                <?php } ?>
+                                <div class="p-2 mb-2 bg-<?php echo $color?> text-white">
+                                    Comisiones Disponibles
+                                    <h4>
+                                        $ <?php 
+                                        if($cartillas[$i]['total']->suma==''){
+                                            echo 0; 
+                                        }else{
+                                            echo $cartillas[$i]['total']->suma;
+                                        }?>
+                                        
+                                        
+                                    </h4>
+                                </div>
+                            <?php }else{ ?>
+                                <hr>
                               <?php } ?>
-                                    <div class="p-2 mb-2 bg-<?php echo $color?> text-white">
-                                        Comisiones Disponibles
-                                        <h4>
-                                            $ <?php 
-                                            if($cartillas[$i]['total']->suma==''){
-                                                echo 0; 
-                                            }else{
-                                                echo $cartillas[$i]['total']->suma;
-                                            }?>
-                                            
-                                            
-                                        </h4>
-                                    </div>
                               </li>
                              
                               <li>
@@ -180,11 +187,14 @@
                                           <?php }else{
                                               ?>
                                               <div style="width:<?php echo $width ?>%" class='text-center'>
+                                                <?php if($cartillas[$i]['cartilla']->id_user==Session::get('id')){ ?>
                                                   <a class="" data-toggle="tooltip" title="Nuevo usuario" href="?controller=Usuarios&action=createUser&id=<?php echo $cartillas[$i]['cartilla']->id?>&p=<?php echo $j+1?>" >
                                                       <img class="w-50" src='view/img/user.png'>
                                                   </a>
 
-
+                                                <?php }else{ ?>
+                                                    <img class="w-50" src='view/img/user.png'>
+                                                <?php  } ?>
                                               </div>
                                           <?php }
                                       } ?>

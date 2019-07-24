@@ -40,9 +40,9 @@
                     <i class="fa fa-fw fa-arrow-down"></i>Productos
           </a>
           <ul class="nav-shop">
-            <?php foreach($categorias as $categoria){ ?>
+            <?php /*foreach($categorias as $categoria){ */?>
               <li><a class="text-color-white" href="?controller=Planes&action=showProducto&id_cat=<?php echo $categoria->id?>"><?php echo $categoria->nombre?></a></li>
-            <?php  } ?>
+            <?php /* }*/ ?>
           </ul>
         </li>
         <li class="nav-item">

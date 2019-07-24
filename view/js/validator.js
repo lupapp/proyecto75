@@ -387,7 +387,7 @@ $(document).ready(function() {
 
                         extension: 'jpeg,jpg,png',
 
-                        type: 'image/jpeg,image/png',
+                        type: 'image/jpeg,image/jpg,image/png',
 
                         maxSize: 2097152,   // 2048 * 1024
 
@@ -407,7 +407,7 @@ $(document).ready(function() {
 
                         extension: 'jpeg,jpg,png',
 
-                        type: 'image/jpeg,image/png',
+                        type: 'image/jpeg,image/jpg,image/png',
 
                         maxSize: 2097152,   // 2048 * 1024
 
@@ -545,7 +545,7 @@ $(document).ready(function() {
 
             },
 
-            valor_bono: {
+            /*valor_bono: {
 
                 validators: {
 
@@ -581,7 +581,7 @@ $(document).ready(function() {
 
                 }
 
-            },
+            },*/
 
             dias: {
 

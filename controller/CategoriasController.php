@@ -1,5 +1,4 @@
 <?php
-
 class CategoriasController extends ControladorBase{
     
     public function __construct() {
@@ -22,7 +21,7 @@ class CategoriasController extends ControladorBase{
         }
         Session::tiempo();
     }
-    public function getCategorias(){
+    public function getCategoriasJson(){
         if(!Session::get('autenticado')){
             header("location:?controller=Login");
         }else{
@@ -45,7 +44,7 @@ class CategoriasController extends ControladorBase{
             $img=$_FILES [ 'img' ];
             
             $categoria= new Categoria();
-            $plan->uploaded($img);
+            $categoria->uploaded($img);
             $categoria->setNombre($nombre);
             $categoria->setPosicion($posicion);
             $categoria->setImg($img['name']);

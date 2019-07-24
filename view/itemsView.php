@@ -10,7 +10,7 @@
     <div class="row mb-5">
         <div class="col-md-12">
             <div class="bannerCategorias">
-                <h1>Categorias</h1>
+                <h1>Nuestros Productos</h1>
             </div>
             
         </div>
@@ -18,10 +18,7 @@
 
     <div class="row">
 
-        <div class="col-md-1">
-           
-
-        </div>
+        
         <div class="col-md-1">
         </div>
         <div class="col-md-10">
@@ -41,27 +38,20 @@
                         <div class="block2">
 
                             <div class="block2-img wrap-pic-w of-hidden pos-relative cursor-pointer">
+                                    
+                                    <a href="?controller=Main&action=showProductos&id_cat=<?php echo $categoria->id ?>" class="btn btn-primary">
                                     <h2 class="titulo-categoria">
                                         <?php echo $categoria->nombre ?>
                                     </h2>
-                                    <a href="?controller=Main&action=showProductos&id=<?php echo $categoria->id ?>" class="btn btn-primary">
                                     <img class="" src="view/img/<?php echo $categoria->img ?>" alt="<?php echo $categoria->nombre ?>">
                                     </a>
                                     <div class="block2-btn-addcart trans-0-4">
-                                        <a href="?controller=Main&action=showProductos&id=<?php echo $categoria->id ?>"                                         class="btn btn-primary">
+                                        <a href="?controller=Main&action=showProductos&id_cat=<?php echo $categoria->id ?>"                                         class="btn btn-primary">
                                         <?php echo $categoria->nombre ?>
                                         </a>
                                     </div>
 
                             </div>
-
-
-
-                            
-                               
-                               
-
-                                
 
                         </div>
 

@@ -7,17 +7,10 @@ class EntidadBase{
 
 
 	public function __construct($table){
-
 		$this->table=(string) $table;
-
-
-
 		require_once "Conectar.php";
-
 		$this->conectar= new Conectar();
-
 		$this->db=$this->conectar->conexion();
-
 	}
 
 
@@ -64,7 +57,6 @@ class EntidadBase{
     public function getPorcentajes($id_plan){
         $resultSet='';
         $query=$this->db->query("SELECT * FROM porcentajes WHERE id_plan='$id_plan'");
-        print_r($query);
         while($row=$query->fetch_object()){
                 $resultSet[]=$row;
         }
@@ -151,20 +143,15 @@ class EntidadBase{
     }
 
     public function getPedidoByid($id){
-        $query=$this->db->query("SELECT * FROM pedidos WHERE id=$id");
-        while($row=$query->fetch_object()){
-            $query2=$this->db->query("SELECT * FROM lineas_pedido WHERE pedido=$row->id");
+        $query=$this->db->query("SELECT users.name, users.email, users.direccion, users.telefono, users.celular, pedidos.id, pedidos.fecha, pedidos.valor,  pedidos.metodo, pedidos.estado, pedidos.cantidad FROM pedidos JOIN users ON users.id=pedidos.id_user WHERE pedidos.id=$id");
+        if($row=$query->fetch_object()){
+            $query2=$this->db->query("SELECT * FROM lineas_pedido JOIN planes ON planes.id = lineas_pedido.id_plan WHERE pedido=$row->id");
             while($row2=$query2->fetch_object()){
                 $lineas[]=$row2;
-            }
-            $query2=$this->db->query("SELECT * FROM users WHERE id=$row->id_user");
-            if($row2=$query2->fetch_object()){
-                $user=$row2;
-            }
-            
-            $resultSet=array("pedido"=>$row, "lineas"=>$lineas, 'user'=>$user);
+            } 
         }
-        return $resultSet;
+        $pedido=array("pedido"=>$row, "lineas"=>$lineas);
+        return $pedido;
     }
 
     public function getAllMembresia(){
@@ -1537,10 +1524,14 @@ class EntidadBase{
 
         }
         public function getPedidoByIdpago($id){
-            $query=$this->db->query("SELECT * FROM pedidos WHERE id_pago=$id");
-            while($row=$query->fetch_object()){
-                $pedido=$row;    
+            $query=$this->db->query("SELECT users.name, users.email, users.direccion, users.telefono, users.celular, pedidos.id, pedidos.fecha, pedidos.valor,  pedidos.metodo, pedidos.estado, pedidos.cantidad FROM pedidos JOIN users ON users.id=pedidos.id_user WHERE id_pago=$id");
+            if($row=$query->fetch_object()){
+                $query2=$this->db->query("SELECT * FROM lineas_pedido JOIN planes ON planes.id = lineas_pedido.id_plan WHERE pedido=$row->id");
+                while($row2=$query2->fetch_object()){
+                    $lineas[]=$row2;
+                } 
             }
+            $pedido=array("pedido"=>$row, "lineas"=>$lineas);
             return $pedido;
         }
         public function getLineasByPedido($id){

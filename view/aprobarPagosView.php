@@ -91,9 +91,9 @@
                                 break;
                             case 1: echo '<td class="bg-warning">Renovación</td>';
                              break;
-                            case 2: echo '<td class="bg-primary">Compra</td>';
+                            case 2: echo '<td class="bg-primary">Compra <a href="?controller=Pedidos&action=showByPago&id='.$pago[$i]['pagos']->id.'" class="btn btn-light">Ver pedido</a></td>';
                                 break;
-                            case 3: echo '<td class="bg-primary">Compra simple</td>';
+                            case 3: echo '<td class="bg-primary">Compra simple <a href="?controller=Pedidos&action=showByPago&id='.$pago[$i]['pagos']->id.'" class="btn btn-light">Ver pedido</a></td>';
                             break;
                         }
                         ?></td>
@@ -159,13 +159,7 @@
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
-        </div>
-      </div>
-    </footer>
+    
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>

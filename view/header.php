@@ -104,20 +104,20 @@ $constantes=new Constantes();
             
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link" href="<?php echo $helper->url("categorias") ?>">
+          <a class="nav-link" href="<?php echo $helper->url("Categorias") ?>">
             <i class="fa fa-tags text-success"></i>
             <span class="nav-link-text">Categorías</span>
           </a>
             
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link"  href="<?php echo $helper->url("Comisiones", "showSolicitudes") ?>">
             <i class="fa fa-fw fa-table text-success"></i>
             <span class="nav-link-text">Solicitudes</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExampleCartillas" data-parent="#exampleAccordion">
+        <a class="nav-link"  href="<?php echo $helper->url("Usuarios", "showPagos") ?>" >
             <i class="fa fa-fw fa-money text-success"></i>
             <span class="nav-link-text">Pagos</span>
           </a>

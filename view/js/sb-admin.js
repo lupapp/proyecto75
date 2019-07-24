@@ -371,7 +371,7 @@
         var valor=$(this).val();
         if(valor==0){
             $.ajax({
-                url: 'index.php?controller=categorias&action=getCategorias',
+                url: 'index.php?controller=categorias&action=getCategoriasJson',
                 type: "GET",
                 dataType: 'application/json; charset=utf-8',
                 success: function (data) {

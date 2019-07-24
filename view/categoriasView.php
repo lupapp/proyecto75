@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <?php if(Session::get('level')=='admin'){  
     include "header.php";
@@ -9,6 +8,7 @@
   } ?>
 </head>
   <div class="content-wrapper">
+    
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
@@ -26,7 +26,8 @@
           
         <div class="card-body">
           <div class="table-responsive">
-              <?php  if (count($categorias)>0){ ?>
+              <?php
+              if (count($categorias)>0){ ?>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
@@ -45,9 +46,10 @@
               </tfoot>
               <tbody>
                 <?php 
-                foreach ($categorias as $categoria){ ?>
+                
+                foreach($categorias as $categoria){ ?>
                 <tr>
-                    <td class="w-10"><img class="img-thumbnail" src="view/img/<?php echo $categoria->img?>"></td>
+                    <td class="w-10"><img class="img-thumbnail" src="view/img/<?php echo $categoria->img ?>" alt="<?php echo $categoria->img ?>"></td>
                     <td><?php echo $categoria->nombre?></td>
                     <td><?php echo $categoria->posicion?></td>
                     
